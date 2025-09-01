@@ -53,10 +53,10 @@ export default function ProjectDetails() {
             <p className="text-muted-foreground mb-6">
               The project you're looking for doesn't exist.
             </p>
-            <Button asChild data-testid="button-back-home">
-              <a href="/">
+            <Button asChild data-testid="button-back-projects-error">
+              <a href="/projects">
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Home
+                Back to Projects
               </a>
             </Button>
           </div>
@@ -85,7 +85,7 @@ export default function ProjectDetails() {
                 className="mb-8 text-muted-foreground hover:text-primary"
                 data-testid="button-back-projects"
               >
-                <a href="/#projects">
+                <a href="/projects">
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Back to Projects
                 </a>
