@@ -53,7 +53,7 @@ export default function Services() {
             Technical <span className="gradient-text">Services</span>
           </h2>
           <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-services-description">
-            Comprehensive electronics engineering services tailored to meet your specific needs and regulatory requirements.
+            Comprehensive electronics engineering services tailored to meet your specific needs and regulatory requirements. Visit our <a href="/resources" className="text-primary hover:underline">Resources</a> section to learn more about compliance guides, professional insights, and educational materials.
           </p>
         </motion.div>
 
