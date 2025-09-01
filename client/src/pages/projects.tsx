@@ -15,6 +15,10 @@ export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocation, setSelectedLocation] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
+  const [appliedSearchTerm, setAppliedSearchTerm] = useState("");
+  const [appliedCategory, setAppliedCategory] = useState("all");
+  const [appliedLocation, setAppliedLocation] = useState("all");
+  const [appliedStatus, setAppliedStatus] = useState("all");
 
   const { data: projects, isLoading, error } = useQuery<Project[]>({
     queryKey: ['/api/projects'],
@@ -48,27 +52,30 @@ export default function Projects() {
     return [...new Set(projects.map(p => p.status))];
   }, [projects]);
 
-  // Filter projects based on search criteria
+  // Filter projects based on applied search criteria (only after Search button is clicked)
   const filteredProjects = useMemo(() => {
     if (!projects) return [];
 
     return projects.filter(project => {
-      const matchesSearch = searchTerm === "" || 
-        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
+      const matchesSearch = appliedSearchTerm === "" || 
+        project.title.toLowerCase().includes(appliedSearchTerm.toLowerCase()) ||
+        project.description.toLowerCase().includes(appliedSearchTerm.toLowerCase()) ||
+        project.technologies.some(tech => tech.toLowerCase().includes(appliedSearchTerm.toLowerCase()));
       
-      const matchesCategory = selectedCategory === "all" || project.category === selectedCategory;
-      const matchesLocation = selectedLocation === "all" || project.location === selectedLocation;
-      const matchesStatus = selectedStatus === "all" || project.status === selectedStatus;
+      const matchesCategory = appliedCategory === "all" || project.category === appliedCategory;
+      const matchesLocation = appliedLocation === "all" || project.location === appliedLocation;
+      const matchesStatus = appliedStatus === "all" || project.status === appliedStatus;
       
       return matchesSearch && matchesCategory && matchesLocation && matchesStatus;
     });
-  }, [projects, searchTerm, selectedCategory, selectedLocation, selectedStatus]);
+  }, [projects, appliedSearchTerm, appliedCategory, appliedLocation, appliedStatus]);
 
   const handleSearch = () => {
-    // Search is already reactive through useMemo, but this function can be used for explicit search
-    // The filtering happens automatically when any search criteria changes
+    // Apply the current search criteria when Search button is clicked
+    setAppliedSearchTerm(searchTerm);
+    setAppliedCategory(selectedCategory);
+    setAppliedLocation(selectedLocation);
+    setAppliedStatus(selectedStatus);
   };
 
 
@@ -136,9 +143,9 @@ export default function Projects() {
 
               {/* Search and Filter Section */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border">
-                {/* Search Input - Centered */}
+                {/* Search Input - Centered with reduced width */}
                 <div className="flex justify-center mb-6">
-                  <div className="relative w-full max-w-md">
+                  <div className="relative w-full max-w-sm">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
@@ -199,11 +206,11 @@ export default function Projects() {
                   </Select>
                 </div>
 
-                {/* Search Button - Centered */}
+                {/* Search Button - Centered with same width as search input */}
                 <div className="flex justify-center">
                   <Button 
                     onClick={handleSearch}
-                    className="gradient-bg"
+                    className="gradient-bg w-full max-w-sm"
                     data-testid="button-search-projects"
                   >
                     <Search className="mr-2 h-4 w-4" />
