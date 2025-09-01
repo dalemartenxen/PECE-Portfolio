@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { LucideIcon, Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
 
 interface ServiceCardProps {
   icon: LucideIcon;
@@ -45,13 +45,7 @@ export default function ServiceCard({ icon: Icon, title, description, features, 
             ))}
           </ul>
           
-          <Button 
-            variant="outline" 
-            className="w-full border border-border hover:border-primary text-foreground hover:text-primary transition-all duration-300"
-            data-testid={`button-service-learn-more-${index}`}
-          >
-            Learn More
-          </Button>
+          
         </CardContent>
       </Card>
     </motion.div>
