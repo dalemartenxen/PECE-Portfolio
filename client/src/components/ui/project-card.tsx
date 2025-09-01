@@ -42,18 +42,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.description}
         </p>
         
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <Badge 
-              key={tech} 
-              variant="secondary" 
-              className="bg-primary/10 text-primary text-xs font-semibold"
-              data-testid={`badge-tech-${project.id}-${tech.toLowerCase().replace(/\s+/g, '-')}`}
-            >
-              {tech}
-            </Badge>
-          ))}
-        </div>
+        
       </div>
     </motion.div>
   );
