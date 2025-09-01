@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import ServiceCard from "@/components/ui/service-card";
 import { Handshake, Compass, Stamp } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Services() {
   const services = [
@@ -53,7 +54,7 @@ export default function Services() {
             Technical <span className="gradient-text">Services</span>
           </h2>
           <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-services-description">
-            Comprehensive electronics engineering services tailored to meet your specific needs and regulatory requirements. Visit our <a href="/resources" className="text-primary hover:underline">Resources</a> section to learn more about compliance guides, professional insights, and educational materials.
+            Comprehensive electronics engineering services tailored to meet your specific needs and regulatory requirements. Visit our <Link href="/resources" className="text-primary hover:underline">Resources</Link> section to learn more about compliance guides, professional insights, and educational materials.
           </p>
         </motion.div>
 
