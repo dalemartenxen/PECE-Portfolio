@@ -1,114 +1,32 @@
-import { useState, useMemo, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
+import { ExternalLink, FileText, Users, Lightbulb } from "lucide-react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-import ProjectCard from "@/components/ui/project-card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Project } from "@shared/schema";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Projects() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedStatus, setSelectedStatus] = useState("all");
-  const [appliedSearchTerm, setAppliedSearchTerm] = useState("");
-  const [appliedCategory, setAppliedCategory] = useState("all");
-  const [appliedStatus, setAppliedStatus] = useState("all");
-
-  const { data: projects, isLoading, error } = useQuery<Project[]>({
-    queryKey: ['/api/projects'],
-  });
-
   useEffect(() => {
     // Scroll to top when page loads
     window.scrollTo({ top: 0, behavior: "auto" });
     
-    document.title = "When You Need a PECE - ElectroPro Engineering";
+    document.title = "Case Studies - When You Need a PECE | ElectroPro Engineering";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Discover scenarios when you need a Professional Electronics/Computer Engineer (PECE) for compliance, safety, and certification.');
+      metaDescription.setAttribute('content', 'Real-world case studies and scenarios showing when you need a Professional Electronics Engineer for compliance, safety, and certification published on Substack.');
     }
   }, []);
 
-  // Get unique categories, locations, and statuses from projects
-  const categories = useMemo(() => {
-    if (!projects) return [];
-    return [...new Set(projects.map(p => p.category))];
-  }, [projects]);
-
-
-  const statuses = useMemo(() => {
-    if (!projects) return [];
-    return [...new Set(projects.map(p => p.status))];
-  }, [projects]);
-
-  // Filter projects based on applied search criteria (only after Search button is clicked)
-  const filteredProjects = useMemo(() => {
-    if (!projects) return [];
-
-    return projects.filter(project => {
-      const matchesSearch = appliedSearchTerm === "" || 
-        project.title.toLowerCase().includes(appliedSearchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(appliedSearchTerm.toLowerCase()) ||
-        project.technologies.some(tech => tech.toLowerCase().includes(appliedSearchTerm.toLowerCase()));
-      
-      const matchesCategory = appliedCategory === "all" || project.category === appliedCategory;
-      const matchesStatus = appliedStatus === "all" || project.status === appliedStatus;
-      
-      return matchesSearch && matchesCategory && matchesStatus;
-    });
-  }, [projects, appliedSearchTerm, appliedCategory, appliedStatus]);
-
-  const handleSearch = () => {
-    // Apply the current search criteria when Search button is clicked
-    setAppliedSearchTerm(searchTerm);
-    setAppliedCategory(selectedCategory);
-    setAppliedStatus(selectedStatus);
+  const handleVisitSubstack = () => {
+    window.open('https://dictbataan.substack.com/', '_blank');
   };
-
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen">
-        <Navbar />
-        <div className="flex items-center justify-center min-h-[50vh] pt-20">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading scenarios...</p>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen">
-        <Navbar />
-        <div className="flex items-center justify-center min-h-[50vh] pt-20">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Error Loading Scenarios</h1>
-            <p className="text-muted-foreground mb-6">
-              Failed to load scenarios. Please try again later.
-            </p>
-            <Button asChild data-testid="button-back-home">
-              <a href="/">Back to Home</a>
-            </Button>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen">
       <Navbar />
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 hero-bg">
@@ -117,7 +35,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+              className="text-center"
             >
               <h1 
                 className="text-4xl md:text-5xl font-bold mb-6"
@@ -128,114 +46,143 @@ export default function Projects() {
               <p 
                 className="text-xl text-secondary-foreground max-w-3xl mx-auto mb-12"
                 data-testid="text-projects-page-description"
-              >Discover common scenarios where a Professional Electronics Engineer is required for safety, compliance, and regulatory approval.</p>
+              >
+                I share real-world case studies and scenarios on Substack showing when Professional Electronics Engineer services are essential for your project's success.
+              </p>
 
-              {/* Search and Filter Section */}
-              <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border">
-                {/* Search Input - Centered with reduced width */}
-                <div className="flex justify-center mb-6">
-                  <div className="relative w-full max-w-sm">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      type="text"
-                      placeholder="Search scenarios by keywords..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                      data-testid="input-search-scenarios"
-                    />
-                  </div>
-                </div>
-
-                {/* Two Dropdown Filters - Row below search */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  {/* Category Dropdown */}
-                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                    <SelectTrigger data-testid="select-category">
-                      <SelectValue placeholder="All Categories" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Categories</SelectItem>
-                      {categories.map((category) => (
-                        <SelectItem key={category} value={category}>
-                          {category}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  {/* Status Dropdown */}
-                  <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                    <SelectTrigger data-testid="select-status">
-                      <SelectValue placeholder="All Status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      {statuses.map((status) => (
-                        <SelectItem key={status} value={status}>
-                          {status.charAt(0).toUpperCase() + status.slice(1)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {/* Search Button - Centered with same width as search input */}
-                <div className="flex justify-center">
-                  <Button 
-                    onClick={handleSearch}
-                    className="gradient-bg w-full max-w-sm"
-                    data-testid="button-search-scenarios"
-                  >
-                    <Search className="mr-2 h-4 w-4" />
-                    Search Scenarios
-                  </Button>
-                </div>
+              {/* Substack CTA Card */}
+              <div className="max-w-2xl mx-auto">
+                <Card className="bg-card/50 backdrop-blur-sm border border-border">
+                  <CardHeader className="text-center">
+                    <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
+                      <FileText className="h-8 w-8 text-primary" />
+                    </div>
+                    <CardTitle className="text-2xl mb-2">Read Case Studies on Substack</CardTitle>
+                    <CardDescription className="text-base">
+                      Discover detailed case studies, real-world scenarios, and practical examples of when PECE services are required
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-center">
+                    <Button 
+                      onClick={handleVisitSubstack}
+                      size="lg"
+                      className="gradient-bg mb-4"
+                      data-testid="button-visit-substack"
+                    >
+                      <ExternalLink className="mr-2 h-5 w-5" />
+                      View Case Studies
+                    </Button>
+                    <p className="text-sm text-muted-foreground">
+                      dictbataan.substack.com
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Projects Grid Section */}
+        {/* What You'll Find Section */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {filteredProjects.length > 0 ? (
-              <>
-                <div className="flex justify-between items-center mb-8">
-                  <p className="text-muted-foreground" data-testid="text-results-count">
-                    Showing {filteredProjects.length} of {projects?.length || 0} scenarios
-                  </p>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-3xl font-bold mb-6">Case Studies You'll Find</h2>
+              <p className="text-xl text-secondary-foreground max-w-3xl mx-auto">
+                Real scenarios from my experience helping clients navigate PECE requirements
+              </p>
+            </motion.div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {filteredProjects.map((project, index) => (
-                    <motion.div
-                      key={project.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                    >
-                      <ProjectCard project={project} />
-                    </motion.div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center py-16"
-              >
-                <h3 className="text-2xl font-bold mb-4">No Scenarios Found</h3>
-                <p className="text-muted-foreground">
-                  No scenarios match your current search criteria. Try adjusting your filters.
-                </p>
-              </motion.div>
-            )}
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: Users,
+                  title: "Medical Facilities",
+                  description: "Hospital equipment installations, medical device compliance, and critical care system certifications requiring PECE oversight."
+                },
+                {
+                  icon: Lightbulb,
+                  title: "Industrial Projects",
+                  description: "Manufacturing facility electrical systems, safety interlocks, and high-power equipment installations with PECE requirements."
+                },
+                {
+                  icon: FileText,
+                  title: "Commercial Buildings",
+                  description: "Office complexes, shopping centers, and public buildings requiring PECE certification for electrical compliance."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                >
+                  <Card className="h-full text-center">
+                    <CardHeader>
+                      <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
+                        <item.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-xl">{item.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <CardDescription className="text-base">
+                        {item.description}
+                      </CardDescription>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-card/30">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <h2 className="text-3xl font-bold mb-6">Learn from Real Examples</h2>
+              <p className="text-xl text-secondary-foreground mb-8 max-w-2xl mx-auto">
+                Read detailed case studies that show exactly when and why PECE services are needed, helping you avoid costly mistakes and delays.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button 
+                  onClick={handleVisitSubstack}
+                  size="lg"
+                  className="gradient-bg"
+                  data-testid="button-read-case-studies"
+                >
+                  <ExternalLink className="mr-2 h-5 w-5" />
+                  Read Case Studies
+                </Button>
+                <Button 
+                  onClick={() => {
+                    const element = document.getElementById("contact");
+                    if (element) {
+                      window.location.href = "/#contact";
+                    } else {
+                      window.location.href = "/";
+                    }
+                  }}
+                  size="lg"
+                  variant="outline"
+                  data-testid="button-contact-direct"
+                >
+                  Discuss Your Project
+                </Button>
+              </div>
+            </motion.div>
           </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );
