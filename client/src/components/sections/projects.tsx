@@ -20,9 +20,7 @@ export default function Projects() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-projects-title">
             When You Need a <span className="gradient-text">PECE</span>
           </h2>
-          <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-projects-description">
-            I share real-world case studies and scenarios on Substack showing when Professional Electronics Engineer services are essential for project success.
-          </p>
+          <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-projects-description">I share case studies and scenarios showing when a Professional Electronics Engineer services are essential for project success.</p>
         </motion.div>
 
         <motion.div
