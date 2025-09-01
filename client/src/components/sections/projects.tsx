@@ -54,7 +54,7 @@ export default function Projects() {
             When You Need a <span className="gradient-text">PECE</span>
           </h2>
           <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-projects-description">
-            Common scenarios where Professional Electronics/Computer Engineer certification is required for safety, compliance, and regulatory approval.
+            Common scenarios where Professional Electronics Engineer is needed for safety, compliance, and regulatory approval.
           </p>
         </motion.div>
 
