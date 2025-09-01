@@ -56,6 +56,8 @@ export class MemStorage implements IStorage {
         technologies: ["Power Electronics", "EV Charging", "Safety", "UL Certified", "Thermal Management"],
         category: "Power Systems",
         status: "completed",
+        projectUrl: null,
+        githubUrl: null,
         createdAt: new Date("2024-02-10"),
         gallery: [
           "https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -70,6 +72,8 @@ export class MemStorage implements IStorage {
         technologies: ["Medical", "FDA Compliant", "Precision", "IEC 60601", "Safety Critical"],
         category: "Medical Devices",
         status: "completed",
+        projectUrl: null,
+        githubUrl: null,
         createdAt: new Date("2024-03-05"),
         gallery: [
           "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -84,6 +88,8 @@ export class MemStorage implements IStorage {
         technologies: ["Automation", "Industrial", "Control", "SCADA", "Real-time"],
         category: "Industrial Automation",
         status: "completed",
+        projectUrl: null,
+        githubUrl: null,
         createdAt: new Date("2024-04-12"),
         gallery: [
           "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -98,6 +104,8 @@ export class MemStorage implements IStorage {
         technologies: ["RF Design", "Long Range", "Signal Processing", "FCC Certified", "Digital Communications"],
         category: "Communications",
         status: "completed",
+        projectUrl: null,
+        githubUrl: null,
         createdAt: new Date("2024-05-20"),
         gallery: [
           "https://images.unsplash.com/photo-1606314850633-ac6eca832fbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -112,6 +120,8 @@ export class MemStorage implements IStorage {
         technologies: ["Solar", "Smart Grid", "MPPT", "IEEE 1547", "Energy Storage"],
         category: "Renewable Energy",
         status: "completed",
+        projectUrl: null,
+        githubUrl: null,
         createdAt: new Date("2024-06-15"),
         gallery: [
           "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
@@ -156,7 +166,11 @@ export class MemStorage implements IStorage {
     const newProject: Project = { 
       ...project, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      longDescription: project.longDescription || null,
+      projectUrl: project.projectUrl || null,
+      githubUrl: project.githubUrl || null,
+      gallery: project.gallery || null
     };
     this.projects.set(id, newProject);
     return newProject;
@@ -166,7 +180,14 @@ export class MemStorage implements IStorage {
     const existingProject = this.projects.get(id);
     if (!existingProject) return undefined;
     
-    const updatedProject: Project = { ...existingProject, ...project };
+    const updatedProject: Project = { 
+      ...existingProject, 
+      ...project,
+      longDescription: project.longDescription !== undefined ? project.longDescription : existingProject.longDescription,
+      projectUrl: project.projectUrl !== undefined ? project.projectUrl : existingProject.projectUrl,
+      githubUrl: project.githubUrl !== undefined ? project.githubUrl : existingProject.githubUrl,
+      gallery: project.gallery !== undefined ? project.gallery : existingProject.gallery
+    };
     this.projects.set(id, updatedProject);
     return updatedProject;
   }
@@ -181,7 +202,9 @@ export class MemStorage implements IStorage {
       ...submission,
       id,
       status: "new",
-      createdAt: new Date()
+      createdAt: new Date(),
+      company: submission.company || null,
+      service: submission.service || null
     };
     this.contactSubmissions.set(id, newSubmission);
     return newSubmission;
