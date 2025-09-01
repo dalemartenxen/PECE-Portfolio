@@ -52,6 +52,8 @@ export default function Navbar() {
       // Set active section based on current route
       if (location === "/projects") {
         setActiveSection("projects");
+      } else if (location === "/resources" || location.startsWith("/resource/")) {
+        setActiveSection("resources");
       }
     }
   }, [location]);
@@ -61,6 +63,7 @@ export default function Navbar() {
     { name: "Case Studies", href: "/#projects", type: "section" },
     { name: "Services", href: "/#services", type: "section" },
     { name: "About", href: "/#about", type: "section" },
+    { name: "Resources", href: "/resources", type: "page" },
     { name: "Contact", href: "/#contact", type: "section" },
   ];
 
@@ -113,6 +116,7 @@ export default function Navbar() {
   const isActive = (item: any) => {
     if (item.type === "page") {
       if (item.href === "/projects" && location === "/projects") return true;
+      if (item.href === "/resources" && (location === "/resources" || location.startsWith("/resource/"))) return true;
       return false;
     } else {
       // For sections, only active when on home page and section matches

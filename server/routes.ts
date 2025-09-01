@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProjectSchema, insertContactSubmissionSchema } from "@shared/schema";
+import { insertProjectSchema, insertContactSubmissionSchema, insertArticleSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -104,6 +104,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(submissions);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch contact submissions" });
+    }
+  });
+
+  // Articles routes
+  app.get("/api/articles", async (req, res) => {
+    try {
+      const articles = await storage.getAllArticles();
+      res.json(articles);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch articles" });
+    }
+  });
+
+  app.get("/api/articles/:id", async (req, res) => {
+    try {
+      const article = await storage.getArticle(req.params.id);
+      if (!article) {
+        return res.status(404).json({ message: "Article not found" });
+      }
+      res.json(article);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch article" });
+    }
+  });
+
+  app.post("/api/articles", async (req, res) => {
+    try {
+      const articleData = insertArticleSchema.parse(req.body);
+      const article = await storage.createArticle(articleData);
+      res.status(201).json(article);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      }
+      res.status(500).json({ message: "Failed to create article" });
     }
   });
 
