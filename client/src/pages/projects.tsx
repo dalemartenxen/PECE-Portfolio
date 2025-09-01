@@ -32,10 +32,15 @@ export default function Projects() {
     }
   }, []);
 
-  // Get unique categories and statuses from projects
+  // Get unique categories, locations, and statuses from projects
   const categories = useMemo(() => {
     if (!projects) return [];
     return [...new Set(projects.map(p => p.category))];
+  }, [projects]);
+
+  const locations = useMemo(() => {
+    if (!projects) return [];
+    return [...new Set(projects.map(p => p.location))];
   }, [projects]);
 
   const statuses = useMemo(() => {
@@ -54,23 +59,18 @@ export default function Projects() {
         project.technologies.some(tech => tech.toLowerCase().includes(searchTerm.toLowerCase()));
       
       const matchesCategory = selectedCategory === "all" || project.category === selectedCategory;
+      const matchesLocation = selectedLocation === "all" || project.location === selectedLocation;
       const matchesStatus = selectedStatus === "all" || project.status === selectedStatus;
       
-      return matchesSearch && matchesCategory && matchesStatus;
+      return matchesSearch && matchesCategory && matchesLocation && matchesStatus;
     });
-  }, [projects, searchTerm, selectedCategory, selectedStatus]);
+  }, [projects, searchTerm, selectedCategory, selectedLocation, selectedStatus]);
 
   const handleSearch = () => {
     // Search is already reactive through useMemo, but this function can be used for explicit search
     // The filtering happens automatically when any search criteria changes
   };
 
-  const clearFilters = () => {
-    setSearchTerm("");
-    setSelectedCategory("all");
-    setSelectedLocation("all");
-    setSelectedStatus("all");
-  };
 
   if (isLoading) {
     return (
@@ -136,9 +136,9 @@ export default function Projects() {
 
               {/* Search and Filter Section */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                  {/* Search Input */}
-                  <div className="relative lg:col-span-2">
+                {/* Search Input - Centered */}
+                <div className="flex justify-center mb-6">
+                  <div className="relative w-full max-w-md">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
@@ -149,7 +149,10 @@ export default function Projects() {
                       data-testid="input-search-projects"
                     />
                   </div>
+                </div>
 
+                {/* Three Dropdown Filters - Row below search */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                   {/* Category Dropdown */}
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger data-testid="select-category">
@@ -160,6 +163,21 @@ export default function Projects() {
                       {categories.map((category) => (
                         <SelectItem key={category} value={category}>
                           {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
+                  {/* Location Dropdown */}
+                  <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+                    <SelectTrigger data-testid="select-location">
+                      <SelectValue placeholder="All Locations" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Locations</SelectItem>
+                      {locations.map((location) => (
+                        <SelectItem key={location} value={location}>
+                          {location}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -181,7 +199,8 @@ export default function Projects() {
                   </Select>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {/* Search Button - Centered */}
+                <div className="flex justify-center">
                   <Button 
                     onClick={handleSearch}
                     className="gradient-bg"
@@ -189,13 +208,6 @@ export default function Projects() {
                   >
                     <Search className="mr-2 h-4 w-4" />
                     Search Projects
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    onClick={clearFilters}
-                    data-testid="button-clear-filters"
-                  >
-                    Clear Filters
                   </Button>
                 </div>
               </div>
@@ -235,16 +247,9 @@ export default function Projects() {
                 className="text-center py-16"
               >
                 <h3 className="text-2xl font-bold mb-4">No Projects Found</h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground">
                   No projects match your current search criteria. Try adjusting your filters.
                 </p>
-                <Button 
-                  onClick={clearFilters}
-                  variant="outline"
-                  data-testid="button-clear-filters-no-results"
-                >
-                  Clear All Filters
-                </Button>
               </motion.div>
             )}
           </div>
