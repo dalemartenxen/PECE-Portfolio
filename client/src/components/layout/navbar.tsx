@@ -2,51 +2,85 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [location] = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["home", "about", "services", "projects", "contact"];
-      const scrollPosition = window.scrollY + 200;
+    // Only set up scroll listener on home page
+    if (location === "/") {
+      const handleScroll = () => {
+        const sections = ["home", "about", "services", "projects", "contact"];
+        const scrollPosition = window.scrollY + 200;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const offsetTop = element.offsetTop;
+            const offsetHeight = element.offsetHeight;
 
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
+            if (
+              scrollPosition >= offsetTop &&
+              scrollPosition < offsetTop + offsetHeight
+            ) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
-      }
-    };
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    } else {
+      // Set active section based on current route
+      if (location === "/projects") {
+        setActiveSection("projects");
+      }
+    }
+  }, [location]);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/", type: "page" },
+    { name: "About", href: "/#about", type: "section" },
+    { name: "Services", href: "/#services", type: "section" },
+    { name: "Projects", href: "/projects", type: "page" },
+    { name: "Contact", href: "/#contact", type: "section" },
   ];
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, type: string) => {
     setIsOpen(false);
-    const targetId = href.replace("#", "");
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    
+    if (type === "page") {
+      // For page navigation, use window.location
+      window.location.href = href;
+    } else {
+      // For section navigation, check if we're on home page
+      if (location !== "/") {
+        // If we're not on home page, navigate to home first with section
+        window.location.href = href;
+      } else {
+        // If we're on home page, scroll to section
+        const targetId = href.replace("/#", "");
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }
+  };
+
+  const isActive = (item: any) => {
+    if (item.type === "page") {
+      if (item.href === "/" && location === "/") return true;
+      if (item.href === "/projects" && location === "/projects") return true;
+      return false;
+    } else {
+      // For sections, only active when on home page and section matches
+      return location === "/" && activeSection === item.href.replace("/#", "");
     }
   };
 
@@ -62,10 +96,10 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a
-              href="#home"
+              href="/"
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick("#home");
+                handleNavClick("/", "page");
               }}
               className="text-xl font-bold gradient-text"
               data-testid="link-logo"
@@ -83,10 +117,10 @@ export default function Navbar() {
                   href={item.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick(item.href);
+                    handleNavClick(item.href, item.type);
                   }}
                   className={`font-medium transition-colors duration-300 ${
-                    activeSection === item.href.replace("#", "")
+                    isActive(item)
                       ? "text-primary"
                       : "text-muted-foreground hover:text-primary"
                   }`}
@@ -133,10 +167,10 @@ export default function Navbar() {
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  handleNavClick(item.href);
+                  handleNavClick(item.href, item.type);
                 }}
                 className={`block px-3 py-2 font-medium transition-colors duration-300 ${
-                  activeSection === item.href.replace("#", "")
+                  isActive(item)
                     ? "text-primary"
                     : "text-muted-foreground hover:text-primary"
                 }`}
