@@ -57,7 +57,7 @@ export default function Navbar() {
   }, [location]);
 
   const navItems = [
-    { name: "Home", href: "/", type: "page" },
+    { name: "Home", href: "/#home", type: "section" },
     { name: "About", href: "/#about", type: "section" },
     { name: "Services", href: "/#services", type: "section" },
     { name: "Projects", href: "/projects", type: "page" },
@@ -108,7 +108,6 @@ export default function Navbar() {
 
   const isActive = (item: any) => {
     if (item.type === "page") {
-      if (item.href === "/" && location === "/") return true;
       if (item.href === "/projects" && location === "/projects") return true;
       return false;
     } else {
@@ -128,13 +127,24 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link
-              href="/"
-              className="text-xl font-bold gradient-text"
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (location !== "/") {
+                  setLocation("/");
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }, 150);
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
+              className="text-xl font-bold gradient-text cursor-pointer"
               data-testid="link-logo"
             >
               PECE Consultancy and Sign-Seal Services
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
