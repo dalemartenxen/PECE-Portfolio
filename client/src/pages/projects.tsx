@@ -109,7 +109,6 @@ export default function Projects() {
   return (
     <div className="min-h-screen">
       <Navbar />
-
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-20 hero-bg">
@@ -129,9 +128,7 @@ export default function Projects() {
               <p 
                 className="text-xl text-secondary-foreground max-w-3xl mx-auto mb-12"
                 data-testid="text-projects-page-description"
-              >
-                Discover common scenarios where a Professional Electronics/Computer Engineer (PECE) is required for safety, compliance, and regulatory approval.
-              </p>
+              >Discover common scenarios where a Professional Electronics Engineer is required for safety, compliance, and regulatory approval.</p>
 
               {/* Search and Filter Section */}
               <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border">
@@ -239,7 +236,6 @@ export default function Projects() {
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );
