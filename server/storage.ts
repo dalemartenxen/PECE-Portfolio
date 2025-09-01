@@ -170,7 +170,7 @@ export class MemStorage implements IStorage {
       longDescription: project.longDescription || null,
       projectUrl: project.projectUrl || null,
       githubUrl: project.githubUrl || null,
-      gallery: project.gallery || null
+      gallery: project.gallery as string[] | null || null
     };
     this.projects.set(id, newProject);
     return newProject;
@@ -186,7 +186,7 @@ export class MemStorage implements IStorage {
       longDescription: project.longDescription !== undefined ? project.longDescription : existingProject.longDescription,
       projectUrl: project.projectUrl !== undefined ? project.projectUrl : existingProject.projectUrl,
       githubUrl: project.githubUrl !== undefined ? project.githubUrl : existingProject.githubUrl,
-      gallery: project.gallery !== undefined ? project.gallery : existingProject.gallery
+      gallery: project.gallery !== undefined ? project.gallery as string[] | null : existingProject.gallery
     };
     this.projects.set(id, updatedProject);
     return updatedProject;
