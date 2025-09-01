@@ -7,9 +7,10 @@ export default function Footer() {
   const [location, setLocation] = useLocation();
 
   const quickLinks = [
-    { name: "About", href: "/#about", type: "section" },
-    { name: "Services", href: "/#services", type: "section" },
     { name: "Case Studies", href: "/projects", type: "page" },
+    { name: "Resources", href: "/resources", type: "page" },
+    { name: "Services", href: "/#services", type: "section" },
+    { name: "About", href: "/#about", type: "section" },
   ];
 
   const legalLinks = [
