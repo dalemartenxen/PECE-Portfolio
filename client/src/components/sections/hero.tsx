@@ -12,15 +12,66 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center hero-bg overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Moving Electrons Background */}
+      <div className="absolute inset-0">
+        {/* Circuit board pattern */}
         <div 
-          className="absolute inset-0" 
+          className="absolute inset-0 opacity-5" 
           style={{
             backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255,107,0,0.3) 1px, transparent 0)',
             backgroundSize: '40px 40px'
           }}
         />
+        
+        {/* Moving electrons */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-primary rounded-full opacity-60"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                x: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
+                y: [0, Math.random() * 200 - 100, Math.random() * 200 - 100, 0],
+                opacity: [0.6, 0.2, 0.8, 0.6],
+                scale: [1, 1.5, 0.8, 1],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 5,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Electron trails */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={`trail-${i}`}
+              className="absolute w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+              style={{
+                top: `${20 + i * 10}%`,
+                transformOrigin: 'left center',
+              }}
+              animate={{
+                scaleX: [0, 1, 0],
+                x: ['-100%', '100%'],
+              }}
+              transition={{
+                duration: Math.random() * 3 + 2,
+                repeat: Infinity,
+                ease: "linear",
+                delay: Math.random() * 3,
+              }}
+            />
+          ))}
+        </div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
