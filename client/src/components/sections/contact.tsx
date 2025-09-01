@@ -57,21 +57,21 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      value: "contact@electroproeng.com",
+      value: "sddgmes@gmail.com",
       subtitle: "Response within 24 hours",
-      href: "mailto:contact@electroproeng.com"
+      href: "mailto:sddgmes@gmail.com"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "(+63) 915 133 2084",
       subtitle: "Mon-Fri, 9 AM - 6 PM EST",
-      href: "tel:+15551234567"
+      href: "tel:+639151332084"
     },
     {
       icon: MapPin,
       title: "Location",
-      value: "San Francisco Bay Area",
+      value: "Region 2 (Cagayan Valley)",
       subtitle: "Remote consultation available",
     }
   ];
@@ -292,12 +292,12 @@ export default function Contact() {
                 <h4 className="font-bold mb-4 text-primary">Professional Licensing</h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between" data-testid="license-number">
-                    <span>P.E. License #:</span>
+                    <span>Professional Regulations Commission (PRC):</span>
                     <span className="font-semibold">PE-12345-CA</span>
                   </div>
                   <div className="flex justify-between" data-testid="license-state">
                     <span>License State:</span>
-                    <span className="font-semibold">California</span>
+                    <span className="font-semibold">Philippines</span>
                   </div>
                   <div className="flex justify-between" data-testid="license-expiration">
                     <span>Expiration:</span>

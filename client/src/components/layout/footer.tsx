@@ -48,21 +48,21 @@ export default function Footer() {
               className="text-2xl font-bold gradient-text mb-4 block"
               data-testid="link-footer-logo"
             >
-              ElectroPro
+              PECE Consultancy and Sign-Seal Services
             </a>
             <p className="text-secondary-foreground mb-6 max-w-md" data-testid="text-footer-description">
               Professional electronics engineering services with over 15 years of experience in consultancy, design, and regulatory compliance.
             </p>
             <div className="flex space-x-4">
               <a 
-                href="mailto:contact@electroproeng.com" 
+                href="mailto:sddgmes@gmail.com" 
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 data-testid="link-footer-email"
               >
                 <Mail className="h-5 w-5" />
               </a>
               <a 
-                href="https://linkedin.com/in/electroproeng" 
+                href="https://linkedin.com/in/sddmartensen" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -71,7 +71,7 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a 
-                href="https://facebook.com/electroproeng" 
+                href="https://facebook.com/sddgmes" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
@@ -131,7 +131,7 @@ export default function Footer() {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm" data-testid="text-copyright">
-            © {currentYear} ElectroPro Engineering. All rights reserved.
+            © {currentYear} PECE Consultancy and Sign-Seal Services. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a 

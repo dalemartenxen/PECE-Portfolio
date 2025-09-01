@@ -17,8 +17,11 @@ export default function Navbar() {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -40,15 +43,15 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
-    const targetId = href.replace('#', '');
+    const targetId = href.replace("#", "");
     const element = document.getElementById(targetId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <motion.nav 
+    <motion.nav
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -58,19 +61,19 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a 
-              href="#home" 
+            <a
+              href="#home"
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick('#home');
+                handleNavClick("#home");
               }}
               className="text-xl font-bold gradient-text"
               data-testid="link-logo"
             >
-              ElectroPro
+              PECE Consultancy and Sign-Seal Services
             </a>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
@@ -83,9 +86,9 @@ export default function Navbar() {
                     handleNavClick(item.href);
                   }}
                   className={`font-medium transition-colors duration-300 ${
-                    activeSection === item.href.replace('#', '')
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                    activeSection === item.href.replace("#", "")
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
                   }`}
                   data-testid={`link-nav-${item.name.toLowerCase()}`}
                 >
@@ -104,7 +107,11 @@ export default function Navbar() {
               className="text-muted-foreground hover:text-primary"
               data-testid="button-mobile-menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </Button>
           </div>
         </div>
@@ -112,7 +119,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <motion.div 
+        <motion.div
           className="md:hidden bg-card border-t border-border"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
@@ -129,9 +136,9 @@ export default function Navbar() {
                   handleNavClick(item.href);
                 }}
                 className={`block px-3 py-2 font-medium transition-colors duration-300 ${
-                  activeSection === item.href.replace('#', '')
-                    ? 'text-primary'
-                    : 'text-muted-foreground hover:text-primary'
+                  activeSection === item.href.replace("#", "")
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-primary"
                 }`}
                 data-testid={`link-mobile-${item.name.toLowerCase()}`}
               >

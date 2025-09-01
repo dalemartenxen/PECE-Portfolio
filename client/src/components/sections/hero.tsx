@@ -95,7 +95,7 @@ export default function Hero() {
             
             {/* Tagline */}
             <p className="text-lg md:text-xl text-secondary-foreground mb-12 max-w-3xl mx-auto leading-relaxed" data-testid="text-hero-tagline">
-              Ensuring compliance and delivering quality electronics engineering services with over a decade of industry expertise and professional certifications.
+              Ensuring compliance and delivering quality electronics engineering services with industry training and experience.
             </p>
           </motion.div>
           
@@ -121,7 +121,7 @@ export default function Hero() {
               onClick={() => handleScrollTo('contact')}
               data-testid="button-get-in-touch"
             >
-              Get In Touch
+              Contact us
             </Button>
           </motion.div>
         </div>

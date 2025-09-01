@@ -5,19 +5,11 @@ export default function About() {
   const credentials = [
     {
       icon: Tag,
-      title: "Licensed Professional Engineer (P.E.)",
+      title: "Professional Electronics Engineer",
     },
     {
-      icon: Award,
-      title: "IEEE Senior Member",
-    },
-    {
-      icon: GraduationCap,
-      title: "M.S. Electrical Engineering",
-    },
-    {
-      icon: Shield,
-      title: "ISO 27001 Certified",
+      icon: Tag,
+      title: "Associate ASEAN Engineer",
     },
   ];
 
@@ -33,7 +25,7 @@ export default function About() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-about-title">
-              About <span className="gradient-text">Me</span>
+              About the <span className="gradient-text">Engineer</span>
             </h2>
             
             <div className="space-y-6 text-lg text-secondary-foreground leading-relaxed">
@@ -65,7 +57,7 @@ export default function About() {
                     data-testid={`credential-${index}`}
                   >
                     <credential.icon className="h-5 w-5 text-primary" />
-                    <span>{credential.title}</span>
+                    <span className="text-[15px]">{credential.title}</span>
                   </motion.div>
                 ))}
               </div>
