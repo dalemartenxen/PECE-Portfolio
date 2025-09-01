@@ -140,47 +140,7 @@ export default function Resources() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-card/30">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <h2 className="text-3xl font-bold mb-6">Stay Updated with Latest Insights</h2>
-              <p className="text-xl text-secondary-foreground mb-8 max-w-2xl mx-auto">
-                Subscribe to my Substack to receive the latest articles on electronics engineering compliance, PECE requirements, and professional guidance directly in your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  onClick={handleVisitSubstack}
-                  size="lg"
-                  className="gradient-bg"
-                  data-testid="button-subscribe-substack"
-                >
-                  <ExternalLink className="mr-2 h-5 w-5" />
-                  Visit My Substack
-                </Button>
-                <Button 
-                  onClick={() => {
-                    const element = document.getElementById("contact");
-                    if (element) {
-                      window.location.href = "/#contact";
-                    } else {
-                      window.location.href = "/";
-                    }
-                  }}
-                  size="lg"
-                  variant="outline"
-                  data-testid="button-contact-direct"
-                >
-                  Get Direct Consultation
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        
       </main>
 
       <Footer />
