@@ -157,28 +157,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Professional Credentials */}
-            <div className="max-w-2xl mx-auto">
-              <Card>
-                <CardContent className="p-8">
-                  <h4 className="text-xl font-bold mb-6 text-center text-primary">Professional Licensing</h4>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center" data-testid="license-number">
-                      <span className="text-muted-foreground">Professional Regulations Commission (PRC):</span>
-                      <span className="font-semibold">PE-12345-CA</span>
-                    </div>
-                    <div className="flex justify-between items-center" data-testid="license-state">
-                      <span className="text-muted-foreground">License State:</span>
-                      <span className="font-semibold">Philippines</span>
-                    </div>
-                    <div className="flex justify-between items-center" data-testid="license-expiration">
-                      <span className="text-muted-foreground">Expiration:</span>
-                      <span className="font-semibold">Dec 2025</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </motion.div>
         </div>
       </div>
