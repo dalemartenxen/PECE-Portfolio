@@ -82,63 +82,7 @@ export default function Resources() {
           </div>
         </section>
 
-        {/* What You'll Find Section */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-6">What You'll Find on My Substack</h2>
-              <p className="text-xl text-secondary-foreground max-w-3xl mx-auto">
-                Comprehensive guides and insights to help you succeed with your electronics engineering projects
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: FileText,
-                  title: "Compliance Guides",
-                  description: "Step-by-step guides on RA 9292 compliance, PECE requirements, and regulatory processes for your projects."
-                },
-                {
-                  icon: BookOpen,
-                  title: "Technical Articles",
-                  description: "In-depth articles covering electronics engineering best practices, common mistakes, and professional insights."
-                },
-                {
-                  icon: Users,
-                  title: "Case Studies",
-                  description: "Real-world examples and scenarios showing when and how PECE services are essential for project success."
-                }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                >
-                  <Card className="h-full text-center">
-                    <CardHeader>
-                      <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                        <item.icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <CardTitle className="text-xl">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base">
-                        {item.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         
       </main>
