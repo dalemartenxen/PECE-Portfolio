@@ -21,6 +21,9 @@ export default function Projects() {
   });
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo({ top: 0, behavior: "auto" });
+    
     document.title = "All Projects - ElectroPro Engineering";
     
     const metaDescription = document.querySelector('meta[name="description"]');

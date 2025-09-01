@@ -70,6 +70,10 @@ export default function Navbar() {
     if (type === "page") {
       // For page navigation, use fast client-side routing
       setLocation(href);
+      // Ensure we scroll to top of the page after navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
     } else {
       // For section navigation, check if we're on home page
       if (location !== "/") {
