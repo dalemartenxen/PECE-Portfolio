@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { Project } from "@shared/schema";
 
 interface ProjectCardProps {
@@ -6,18 +7,14 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const handleClick = () => {
-    window.location.href = `/project/${project.id}`;
-  };
-
   return (
-    <motion.div 
-      className="project-card bg-card border border-border rounded-xl overflow-hidden cursor-pointer"
-      onClick={handleClick}
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.3 }}
-      data-testid={`project-card-${project.id}`}
-    >
+    <Link href={`/project/${project.id}`}>
+      <motion.div 
+        className="project-card bg-card border border-border rounded-xl overflow-hidden cursor-pointer"
+        whileHover={{ y: -8 }}
+        transition={{ duration: 0.3 }}
+        data-testid={`project-card-${project.id}`}
+      >
       <div className="relative">
         <img 
           src={project.imageUrl} 
@@ -43,6 +40,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         
         
       </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }

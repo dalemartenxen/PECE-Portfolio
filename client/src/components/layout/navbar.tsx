@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     // Only set up scroll listener on home page
@@ -55,15 +55,23 @@ export default function Navbar() {
     setIsOpen(false);
     
     if (type === "page") {
-      // For page navigation, use window.location
-      window.location.href = href;
+      // For page navigation, use fast client-side routing
+      setLocation(href);
     } else {
       // For section navigation, check if we're on home page
       if (location !== "/") {
         // If we're not on home page, navigate to home first with section
-        window.location.href = href;
+        setLocation("/");
+        // Wait for navigation then scroll to section
+        setTimeout(() => {
+          const targetId = href.replace("/#", "");
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
       } else {
-        // If we're on home page, scroll to section
+        // If we're on home page, scroll to section immediately
         const targetId = href.replace("/#", "");
         const element = document.getElementById(targetId);
         if (element) {
@@ -95,39 +103,50 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a
+            <Link
               href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick("/", "page");
-              }}
               className="text-xl font-bold gradient-text"
               data-testid="link-logo"
             >
               PECE Consultancy and Sign-Seal Services
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(item.href, item.type);
-                  }}
-                  className={`font-medium transition-colors duration-300 ${
-                    isActive(item)
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
-                  data-testid={`link-nav-${item.name.toLowerCase()}`}
-                >
-                  {item.name}
-                </a>
+                item.type === "page" ? (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`font-medium transition-colors duration-300 ${
+                      isActive(item)
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`}
+                    data-testid={`link-nav-${item.name.toLowerCase()}`}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href, item.type);
+                    }}
+                    className={`font-medium transition-colors duration-300 ${
+                      isActive(item)
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`}
+                    data-testid={`link-nav-${item.name.toLowerCase()}`}
+                  >
+                    {item.name}
+                  </a>
+                )
               ))}
             </div>
           </div>
@@ -162,22 +181,38 @@ export default function Navbar() {
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.href, item.type);
-                }}
-                className={`block px-3 py-2 font-medium transition-colors duration-300 ${
-                  isActive(item)
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
-                }`}
-                data-testid={`link-mobile-${item.name.toLowerCase()}`}
-              >
-                {item.name}
-              </a>
+              item.type === "page" ? (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-3 py-2 font-medium transition-colors duration-300 ${
+                    isActive(item)
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                  data-testid={`link-mobile-${item.name.toLowerCase()}`}
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.href, item.type);
+                  }}
+                  className={`block px-3 py-2 font-medium transition-colors duration-300 ${
+                    isActive(item)
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
+                  }`}
+                  data-testid={`link-mobile-${item.name.toLowerCase()}`}
+                >
+                  {item.name}
+                </a>
+              )
             ))}
           </div>
         </motion.div>

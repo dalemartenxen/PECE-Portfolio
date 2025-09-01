@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ui/project-card";
 import { Project } from "@shared/schema";
@@ -86,7 +87,7 @@ export default function Projects() {
                 className="gradient-bg text-primary-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
                 data-testid="button-view-all-projects"
               >
-                <a href="/projects">View All Projects</a>
+                <Link href="/projects">View All Projects</Link>
               </Button>
             </motion.div>
           </>
