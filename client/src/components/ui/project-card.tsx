@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 import { Project } from "@shared/schema";
 
 interface ProjectCardProps {
@@ -7,14 +7,24 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const [, setLocation] = useLocation();
+
+  const handleViewDetails = () => {
+    setLocation(`/project/${project.id}`);
+    // Scroll to top of page after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }, 50);
+  };
+
   return (
-    <Link href={`/project/${project.id}`}>
-      <motion.div 
-        className="project-card bg-card border border-border rounded-xl overflow-hidden cursor-pointer"
-        whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
-        data-testid={`project-card-${project.id}`}
-      >
+    <motion.div 
+      className="project-card bg-card border border-border rounded-xl overflow-hidden cursor-pointer"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3 }}
+      onClick={handleViewDetails}
+      data-testid={`project-card-${project.id}`}
+    >
       <div className="relative">
         <img 
           src={project.imageUrl} 
@@ -40,7 +50,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         
         
       </div>
-      </motion.div>
-    </Link>
+    </motion.div>
   );
 }
