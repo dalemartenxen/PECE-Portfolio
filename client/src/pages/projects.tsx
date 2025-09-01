@@ -13,11 +13,9 @@ import { Project } from "@shared/schema";
 export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedLocation, setSelectedLocation] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [appliedSearchTerm, setAppliedSearchTerm] = useState("");
   const [appliedCategory, setAppliedCategory] = useState("all");
-  const [appliedLocation, setAppliedLocation] = useState("all");
   const [appliedStatus, setAppliedStatus] = useState("all");
 
   const { data: projects, isLoading, error } = useQuery<Project[]>({
@@ -42,10 +40,6 @@ export default function Projects() {
     return [...new Set(projects.map(p => p.category))];
   }, [projects]);
 
-  const locations = useMemo(() => {
-    if (!projects) return [];
-    return [...new Set(projects.map(p => p.location))];
-  }, [projects]);
 
   const statuses = useMemo(() => {
     if (!projects) return [];
@@ -63,18 +57,16 @@ export default function Projects() {
         project.technologies.some(tech => tech.toLowerCase().includes(appliedSearchTerm.toLowerCase()));
       
       const matchesCategory = appliedCategory === "all" || project.category === appliedCategory;
-      const matchesLocation = appliedLocation === "all" || project.location === appliedLocation;
       const matchesStatus = appliedStatus === "all" || project.status === appliedStatus;
       
-      return matchesSearch && matchesCategory && matchesLocation && matchesStatus;
+      return matchesSearch && matchesCategory && matchesStatus;
     });
-  }, [projects, appliedSearchTerm, appliedCategory, appliedLocation, appliedStatus]);
+  }, [projects, appliedSearchTerm, appliedCategory, appliedStatus]);
 
   const handleSearch = () => {
     // Apply the current search criteria when Search button is clicked
     setAppliedSearchTerm(searchTerm);
     setAppliedCategory(selectedCategory);
-    setAppliedLocation(selectedLocation);
     setAppliedStatus(selectedStatus);
   };
 
@@ -158,8 +150,8 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Three Dropdown Filters - Row below search */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                {/* Two Dropdown Filters - Row below search */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   {/* Category Dropdown */}
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                     <SelectTrigger data-testid="select-category">
@@ -170,21 +162,6 @@ export default function Projects() {
                       {categories.map((category) => (
                         <SelectItem key={category} value={category}>
                           {category}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  {/* Location Dropdown */}
-                  <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-                    <SelectTrigger data-testid="select-location">
-                      <SelectValue placeholder="All Locations" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Locations</SelectItem>
-                      {locations.map((location) => (
-                        <SelectItem key={location} value={location}>
-                          {location}
                         </SelectItem>
                       ))}
                     </SelectContent>

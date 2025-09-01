@@ -9,7 +9,7 @@ export default function Footer() {
   const quickLinks = [
     { name: "About", href: "/#about", type: "section" },
     { name: "Services", href: "/#services", type: "section" },
-    { name: "Projects", href: "/projects", type: "page" },
+    { name: "Case Studies", href: "/projects", type: "page" },
   ];
 
   const legalLinks = [

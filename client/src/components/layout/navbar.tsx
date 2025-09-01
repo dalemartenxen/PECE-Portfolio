@@ -60,7 +60,7 @@ export default function Navbar() {
     { name: "Home", href: "/#home", type: "section" },
     { name: "About", href: "/#about", type: "section" },
     { name: "Services", href: "/#services", type: "section" },
-    { name: "Projects", href: "/projects", type: "page" },
+    { name: "Case Studies", href: "/projects", type: "page" },
     { name: "Contact", href: "/#contact", type: "section" },
   ];
 
