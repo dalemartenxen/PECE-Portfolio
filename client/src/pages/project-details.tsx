@@ -1,4 +1,4 @@
-import { useRoute } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
@@ -11,7 +11,33 @@ import { Project } from "@shared/schema";
 
 export default function ProjectDetails() {
   const [, params] = useRoute("/project/:id");
+  const [location, setLocation] = useLocation();
   const projectId = params?.id;
+
+  // Optimized navigation functions
+  const handleBackToProjects = () => {
+    setLocation("/projects");
+    // Ensure we scroll to top when navigating
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }, 50);
+  };
+
+  const handleGetInTouch = () => {
+    setLocation("/");
+    // Wait for navigation then scroll to contact section
+    setTimeout(() => {
+      const element = document.getElementById("contact");
+      if (element) {
+        const navbarHeight = 64;
+        const offsetPosition = element.offsetTop - navbarHeight - 20;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 100);
+  };
 
   const {
     data: project,
@@ -53,11 +79,12 @@ export default function ProjectDetails() {
             <p className="text-muted-foreground mb-6">
               The project you're looking for doesn't exist.
             </p>
-            <Button asChild data-testid="button-back-projects-error">
-              <a href="/projects">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Projects
-              </a>
+            <Button 
+              onClick={handleBackToProjects}
+              data-testid="button-back-projects-error"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Projects
             </Button>
           </div>
         </div>
@@ -81,14 +108,12 @@ export default function ProjectDetails() {
             >
               <Button
                 variant="ghost"
-                asChild
+                onClick={handleBackToProjects}
                 className="mb-8 text-muted-foreground hover:text-primary"
                 data-testid="button-back-projects"
               >
-                <a href="/projects">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Projects
-                </a>
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Projects
               </Button>
 
               <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -341,11 +366,11 @@ export default function ProjectDetails() {
                         Let's discuss how I can help with your next project.
                       </p>
                       <Button
-                        asChild
+                        onClick={handleGetInTouch}
                         className="gradient-bg w-full"
                         data-testid="button-contact-cta"
                       >
-                        <a href="/#contact">Get In Touch</a>
+                        Get In Touch
                       </Button>
                     </CardContent>
                   </Card>
