@@ -1,28 +1,62 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Facebook } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [location, setLocation] = useLocation();
 
   const quickLinks = [
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about", type: "section" },
+    { name: "Services", href: "/#services", type: "section" },
+    { name: "Projects", href: "/projects", type: "page" },
   ];
 
-  const services = [
-    { name: "Consultancy", href: "#services" },
-    { name: "Electronics Design", href: "#services" },
-    { name: "Sign & Seal", href: "#services" },
-    { name: "Compliance", href: "#services" },
+  const legalLinks = [
+    { name: "Privacy Policy", href: "#privacy" },
+    { name: "Terms of Service", href: "#terms" },
+    { name: "Cookie Policy", href: "#cookies" },
+    { name: "Compliance", href: "#compliance" },
   ];
 
-  const handleLinkClick = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.getElementById(href.replace('#', ''));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+  const handleLinkClick = (href: string, type: string) => {
+    if (type === "page") {
+      // For page navigation, use client-side routing
+      setLocation(href);
+      // Scroll to top of the page after navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+    } else {
+      // For section navigation, check if we're on home page
+      if (location !== "/") {
+        // If we're not on home page, navigate to home first
+        setLocation("/");
+        // Wait for navigation then scroll to section
+        setTimeout(() => {
+          const targetId = href.replace("/#", "");
+          const element = document.getElementById(targetId);
+          if (element) {
+            const navbarHeight = 64; // Account for fixed navbar
+            const offsetPosition = element.offsetTop - navbarHeight - 20;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        }, 150);
+      } else {
+        // If we're on home page, scroll to section immediately
+        const targetId = href.replace("/#", "");
+        const element = document.getElementById(targetId);
+        if (element) {
+          const navbarHeight = 64; // Account for fixed navbar
+          const offsetPosition = element.offsetTop - navbarHeight - 20;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
       }
     }
   };
@@ -43,7 +77,14 @@ export default function Footer() {
               href="#home" 
               onClick={(e) => {
                 e.preventDefault();
-                handleLinkClick('#home');
+                if (location !== "/") {
+                  setLocation("/");
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }, 150);
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
               }}
               className="text-2xl font-bold gradient-text mb-4 block"
               data-testid="link-footer-logo"
@@ -92,7 +133,7 @@ export default function Footer() {
                     href={link.href} 
                     onClick={(e) => {
                       e.preventDefault();
-                      handleLinkClick(link.href);
+                      handleLinkClick(link.href, link.type);
                     }}
                     className="text-secondary-foreground hover:text-primary transition-colors duration-300"
                     data-testid={`link-footer-${link.name.toLowerCase()}`}
@@ -104,22 +145,22 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Legal */}
           <div>
-            <h3 className="font-bold mb-4">Services</h3>
+            <h3 className="font-bold mb-4">Legal</h3>
             <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service.name}>
+              {legalLinks.map((link) => (
+                <li key={link.name}>
                   <a 
-                    href={service.href} 
+                    href={link.href} 
                     onClick={(e) => {
                       e.preventDefault();
-                      handleLinkClick(service.href);
+                      // These are placeholder links for now
                     }}
                     className="text-secondary-foreground hover:text-primary transition-colors duration-300"
-                    data-testid={`link-footer-service-${service.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`link-footer-legal-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
                   >
-                    {service.name}
+                    {link.name}
                   </a>
                 </li>
               ))}
