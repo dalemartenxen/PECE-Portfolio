@@ -94,218 +94,91 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <Card>
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-                
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full Name</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="John Doe" 
-                              {...field} 
-                              data-testid="input-contact-name"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email Address</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="email"
-                              placeholder="john@example.com" 
-                              {...field} 
-                              data-testid="input-contact-email"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="company"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Company (Optional)</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="Your Company" 
-                              {...field} 
-                              value={field.value || ""}
-                              data-testid="input-contact-company"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="service"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Service Interest</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value || ""}>
-                            <FormControl>
-                              <SelectTrigger data-testid="select-contact-service">
-                                <SelectValue placeholder="Select a service..." />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="consultancy">Engineering Consultancy</SelectItem>
-                              <SelectItem value="design">Electronics Design</SelectItem>
-                              <SelectItem value="sign-seal">Sign & Seal Services</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Project Details</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              rows={5}
-                              placeholder="Tell me about your project requirements, timeline, and any specific challenges you're facing..."
-                              className="resize-none"
-                              {...field} 
-                              data-testid="textarea-contact-message"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full gradient-bg text-primary-foreground py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
-                      disabled={contactMutation.isPending}
-                      data-testid="button-contact-submit"
-                    >
-                      {contactMutation.isPending ? "Sending..." : "Send Message"}
-                    </Button>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
-          </motion.div>
-
+        <div className="max-w-4xl mx-auto">
           {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-12"
           >
-            <div>
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <div className="space-y-6">
+            <div className="text-center">
+              <h3 className="text-3xl font-bold mb-8">Contact Information</h3>
+              <div className="grid md:grid-cols-3 gap-8">
                 {contactInfo.map((info, index) => (
-                  <div key={info.title} className="flex items-start space-x-4" data-testid={`contact-info-${index}`}>
-                    <div className="w-12 h-12 gradient-bg rounded-lg flex items-center justify-center flex-shrink-0">
-                      <info.icon className="h-6 w-6 text-primary-foreground" />
+                  <div key={info.title} className="flex flex-col items-center text-center" data-testid={`contact-info-${index}`}>
+                    <div className="w-16 h-16 gradient-bg rounded-lg flex items-center justify-center mb-4">
+                      <info.icon className="h-8 w-8 text-primary-foreground" />
                     </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">{info.title}</h4>
-                      {info.href ? (
-                        <a href={info.href} className="text-secondary-foreground hover:text-primary transition-colors">
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-secondary-foreground">{info.value}</p>
-                      )}
-                      <p className="text-sm text-muted-foreground">{info.subtitle}</p>
-                    </div>
+                    <h4 className="font-semibold text-lg mb-2">{info.title}</h4>
+                    {info.href ? (
+                      <a href={info.href} className="text-secondary-foreground hover:text-primary transition-colors text-base font-medium">
+                        {info.value}
+                      </a>
+                    ) : (
+                      <p className="text-secondary-foreground text-base font-medium">{info.value}</p>
+                    )}
+                    <p className="text-sm text-muted-foreground mt-1">{info.subtitle}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Social Links */}
-            <div>
-              <h3 className="text-xl font-bold mb-4">Connect With Me</h3>
-              <div className="flex space-x-4">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-6">Connect With Me</h3>
+              <div className="flex justify-center space-x-6">
                 <a 
                   href="mailto:contact@electroproeng.com" 
-                  className="w-12 h-12 bg-card border border-border hover:border-primary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   data-testid="link-social-email"
                 >
-                  <Mail className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors duration-300" />
+                  <Mail className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
                 </a>
                 <a 
                   href="https://linkedin.com/in/electroproeng" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-card border border-border hover:border-primary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   data-testid="link-social-linkedin"
                 >
-                  <Linkedin className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors duration-300" />
+                  <Linkedin className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
                 </a>
                 <a 
                   href="https://facebook.com/electroproeng" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-12 h-12 bg-card border border-border hover:border-primary rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
                   data-testid="link-social-facebook"
                 >
-                  <Facebook className="h-5 w-5 text-muted-foreground hover:text-primary transition-colors duration-300" />
+                  <Facebook className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
                 </a>
               </div>
             </div>
 
             {/* Professional Credentials */}
-            <Card>
-              <CardContent className="p-6">
-                <h4 className="font-bold mb-4 text-primary">Professional Licensing</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between" data-testid="license-number">
-                    <span>Professional Regulations Commission (PRC):</span>
-                    <span className="font-semibold">PE-12345-CA</span>
+            <div className="max-w-2xl mx-auto">
+              <Card>
+                <CardContent className="p-8">
+                  <h4 className="text-xl font-bold mb-6 text-center text-primary">Professional Licensing</h4>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center" data-testid="license-number">
+                      <span className="text-muted-foreground">Professional Regulations Commission (PRC):</span>
+                      <span className="font-semibold">PE-12345-CA</span>
+                    </div>
+                    <div className="flex justify-between items-center" data-testid="license-state">
+                      <span className="text-muted-foreground">License State:</span>
+                      <span className="font-semibold">Philippines</span>
+                    </div>
+                    <div className="flex justify-between items-center" data-testid="license-expiration">
+                      <span className="text-muted-foreground">Expiration:</span>
+                      <span className="font-semibold">Dec 2025</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between" data-testid="license-state">
-                    <span>License State:</span>
-                    <span className="font-semibold">Philippines</span>
-                  </div>
-                  <div className="flex justify-between" data-testid="license-expiration">
-                    <span>Expiration:</span>
-                    <span className="font-semibold">Dec 2025</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -30,15 +30,15 @@ export default function About() {
             
             <div className="space-y-6 text-lg text-secondary-foreground leading-relaxed">
               <p data-testid="text-about-paragraph-1">
-                With over 15 years of experience in electronics engineering, I specialize in providing comprehensive consultancy services and professional sign-seal solutions for complex electronic systems and regulatory compliance.
+                With years of experience in electronics engineering, I provide PECE consultancy and sign-seal services for electronic design & systems and regulatory compliance.
               </p>
               
               <p data-testid="text-about-paragraph-2">
-                My expertise spans across power electronics, embedded systems, RF design, and safety-critical applications. I hold professional engineering licenses and certifications that enable me to provide legally binding engineering approvals and documentation.
+                My expertise spans across Information and Communications Technology (ICT), Telecommunications (Outside Plant Design), Fire Detection and Alarm System (FDAS) and Electronics Systems Design. I hold professional engineering licenses and certifications that enable me to provide legally binding engineering certifications and documentation.
               </p>
               
               <p data-testid="text-about-paragraph-3">
-                I work with startups, established companies, and government agencies to ensure their electronic products meet all regulatory requirements while maintaining optimal performance and cost-effectiveness.
+                I work with local companies, local government units, and government agencies to ensure their electronics engineering needs meet all regulatory requirements and maintaining industry-standard compliant and cost-effectiveness.
               </p>
             </div>
 
@@ -57,7 +57,7 @@ export default function About() {
                     data-testid={`credential-${index}`}
                   >
                     <credential.icon className="h-5 w-5 text-primary" />
-                    <span className="text-[15px]">{credential.title}</span>
+                    <span>{credential.title}</span>
                   </motion.div>
                 ))}
               </div>
@@ -89,7 +89,7 @@ export default function About() {
               data-testid="stat-years-experience"
             >
               <div className="text-center">
-                <div className="text-3xl font-bold gradient-text">15+</div>
+                <div className="text-3xl font-bold gradient-text">7+</div>
                 <div className="text-sm text-muted-foreground">Years Experience</div>
               </div>
             </motion.div>
@@ -103,7 +103,7 @@ export default function About() {
               data-testid="stat-projects-completed"
             >
               <div className="text-center">
-                <div className="text-3xl font-bold gradient-text">200+</div>
+                <div className="text-3xl font-bold gradient-text">10+</div>
                 <div className="text-sm text-muted-foreground">Projects Completed</div>
               </div>
             </motion.div>
