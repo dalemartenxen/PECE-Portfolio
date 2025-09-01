@@ -1,23 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, LogIn, LogOut, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLocation, Link } from "wouter";
-import { useAuth } from "@/hooks/useAuth";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [location, setLocation] = useLocation();
-  const { user, isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
     // Only set up scroll listener on home page
@@ -163,95 +153,40 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-8">
-              <div className="flex items-baseline space-x-8">
-                {navItems.map((item) => (
-                  item.type === "page" ? (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className={`font-medium transition-colors duration-300 ${
-                        isActive(item)
-                          ? "text-primary"
-                          : "text-muted-foreground hover:text-primary"
-                      }`}
-                      data-testid={`link-nav-${item.name.toLowerCase()}`}
-                    >
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href, item.type);
-                      }}
-                      className={`font-medium transition-colors duration-300 ${
-                        isActive(item)
-                          ? "text-primary"
-                          : "text-muted-foreground hover:text-primary"
-                      }`}
-                      data-testid={`link-nav-${item.name.toLowerCase()}`}
-                    >
-                      {item.name}
-                    </a>
-                  )
-                ))}
-              </div>
-              
-              {/* Authentication */}
-              {!isLoading && (
-                isAuthenticated ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="relative h-8 w-8 rounded-full" data-testid="button-user-menu">
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage 
-                            src={user?.profileImageUrl || undefined} 
-                            alt={user?.firstName ? `${user.firstName} ${user.lastName}` : "User"} 
-                          />
-                          <AvatarFallback>
-                            {user?.firstName ? user.firstName.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
-                          </AvatarFallback>
-                        </Avatar>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56" align="end" forceMount>
-                      <div className="flex items-center justify-start gap-2 p-2">
-                        <div className="flex flex-col space-y-1 leading-none">
-                          {user?.firstName && (
-                            <p className="font-medium" data-testid="text-user-name">
-                              {user.firstName} {user.lastName}
-                            </p>
-                          )}
-                          {user?.email && (
-                            <p className="w-[200px] truncate text-sm text-muted-foreground" data-testid="text-user-email">
-                              {user.email}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
-                        <a href="/api/logout" className="w-full" data-testid="button-logout">
-                          <LogOut className="mr-2 h-4 w-4" />
-                          <span>Log out</span>
-                        </a>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Button 
-                    onClick={() => window.location.href = '/api/login'}
-                    size="sm"
-                    data-testid="button-login-nav"
+            <div className="ml-10 flex items-baseline space-x-8">
+              {navItems.map((item) => (
+                item.type === "page" ? (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`font-medium transition-colors duration-300 ${
+                      isActive(item)
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`}
+                    data-testid={`link-nav-${item.name.toLowerCase()}`}
                   >
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Sign In
-                  </Button>
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item.href, item.type);
+                    }}
+                    className={`font-medium transition-colors duration-300 ${
+                      isActive(item)
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-primary"
+                    }`}
+                    data-testid={`link-nav-${item.name.toLowerCase()}`}
+                  >
+                    {item.name}
+                  </a>
                 )
-              )}
+              ))}
             </div>
           </div>
 
@@ -318,48 +253,6 @@ export default function Navbar() {
                 </a>
               )
             ))}
-            
-            {/* Mobile Authentication */}
-            {!isLoading && (
-              <div className="border-t border-border pt-4 mt-4">
-                {isAuthenticated ? (
-                  <div className="space-y-2">
-                    {user?.firstName && (
-                      <div className="px-3 py-2">
-                        <p className="font-medium text-foreground" data-testid="text-mobile-user-name">
-                          {user.firstName} {user.lastName}
-                        </p>
-                        {user.email && (
-                          <p className="text-sm text-muted-foreground" data-testid="text-mobile-user-email">
-                            {user.email}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                    <a
-                      href="/api/logout"
-                      className="flex items-center px-3 py-2 font-medium text-muted-foreground hover:text-primary transition-colors"
-                      data-testid="button-mobile-logout"
-                    >
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Log out
-                    </a>
-                  </div>
-                ) : (
-                  <Button 
-                    onClick={() => {
-                      window.location.href = '/api/login';
-                      setIsOpen(false);
-                    }}
-                    className="w-full"
-                    data-testid="button-mobile-login"
-                  >
-                    <LogIn className="w-4 h-4 mr-2" />
-                    Sign In
-                  </Button>
-                )}
-              </div>
-            )}
           </div>
         </motion.div>
       )}
