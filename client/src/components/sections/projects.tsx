@@ -32,9 +32,7 @@ export default function Projects() {
         >
           <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold mb-4">Read Case Studies on Substack</h3>
-            <p className="text-secondary-foreground mb-8">
-              Discover detailed case studies, real-world scenarios, and practical examples of when PECE services are required for compliance, safety, and regulatory approval.
-            </p>
+            <p className="text-secondary-foreground mb-8">This will redirect you to my Substack site</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 onClick={handleVisitSubstack}
