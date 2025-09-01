@@ -6,7 +6,13 @@ export default function Hero() {
   const handleScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navbarHeight = 64; // Account for fixed navbar
+      const offsetPosition = element.offsetTop - navbarHeight - 20; // Extra space for visual comfort
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 

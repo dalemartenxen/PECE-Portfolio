@@ -12,28 +12,41 @@ export default function Navbar() {
   useEffect(() => {
     // Only set up scroll listener on home page
     if (location === "/") {
+      let ticking = false;
+      
       const handleScroll = () => {
-        const sections = ["home", "about", "services", "projects", "contact"];
-        const scrollPosition = window.scrollY + 200;
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const sections = ["home", "about", "services", "projects", "contact"];
+            const navbarHeight = 64; // 16 * 4 (h-16 in Tailwind)
+            const scrollPosition = window.scrollY + navbarHeight + 50; // More precise offset
 
-        for (const section of sections) {
-          const element = document.getElementById(section);
-          if (element) {
-            const offsetTop = element.offsetTop;
-            const offsetHeight = element.offsetHeight;
+            let currentSection = "home"; // Default to home section
 
-            if (
-              scrollPosition >= offsetTop &&
-              scrollPosition < offsetTop + offsetHeight
-            ) {
-              setActiveSection(section);
-              break;
+            for (const section of sections) {
+              const element = document.getElementById(section);
+              if (element) {
+                const offsetTop = element.offsetTop;
+                const offsetHeight = element.offsetHeight;
+
+                // Check if we're within this section's boundaries
+                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                  currentSection = section;
+                }
+              }
             }
-          }
+
+            setActiveSection(currentSection);
+            ticking = false;
+          });
+          ticking = true;
         }
       };
 
-      window.addEventListener("scroll", handleScroll);
+      // Initial call to set correct section on load
+      handleScroll();
+      
+      window.addEventListener("scroll", handleScroll, { passive: true });
       return () => window.removeEventListener("scroll", handleScroll);
     } else {
       // Set active section based on current route
@@ -67,15 +80,27 @@ export default function Navbar() {
           const targetId = href.replace("/#", "");
           const element = document.getElementById(targetId);
           if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            const navbarHeight = 64; // Account for fixed navbar
+            const offsetPosition = element.offsetTop - navbarHeight - 20; // Extra space for visual comfort
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
           }
-        }, 100);
+        }, 150); // Slightly longer delay for page load
       } else {
         // If we're on home page, scroll to section immediately
         const targetId = href.replace("/#", "");
         const element = document.getElementById(targetId);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          const navbarHeight = 64; // Account for fixed navbar
+          const offsetPosition = element.offsetTop - navbarHeight - 20; // Extra space for visual comfort
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
         }
       }
     }
