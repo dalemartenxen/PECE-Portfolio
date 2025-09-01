@@ -82,10 +82,11 @@ export default function Projects() {
             >
               <Button 
                 size="lg"
+                asChild
                 className="gradient-bg text-primary-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
                 data-testid="button-view-all-projects"
               >
-                View All Projects
+                <a href="/projects">View All Projects</a>
               </Button>
             </motion.div>
           </>
