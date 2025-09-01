@@ -32,99 +32,98 @@ export class MemStorage implements IStorage {
     const sampleProjects: Project[] = [
       {
         id: "1",
-        title: "IoT Sensor Network",
-        description: "Industrial IoT sensor network for environmental monitoring with wireless communication and cloud integration.",
-        longDescription: "A comprehensive IoT solution designed for industrial environmental monitoring. The system consists of multiple wireless sensor nodes that collect temperature, humidity, pressure, and air quality data. Each node communicates via LoRaWAN to a central gateway, which then forwards data to cloud platforms for real-time analysis and alerting. The solution includes custom PCB design, embedded firmware development, and a complete backend infrastructure.",
-        imageUrl: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["IoT", "Wireless", "Cloud", "LoRaWAN", "Environmental Monitoring"],
-        category: "IoT Systems",
-        status: "completed",
-        projectUrl: "https://example.com/iot-project",
-        githubUrl: "https://github.com/example/iot-sensor",
-        createdAt: new Date("2024-01-15"),
-        gallery: [
-          "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-          "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-        ]
-      },
-      {
-        id: "2",
-        title: "Power Management System",
-        description: "High-efficiency power management solution for electric vehicle charging stations with advanced safety features.",
-        longDescription: "An advanced power management system specifically designed for electric vehicle charging infrastructure. The system incorporates multiple voltage regulation stages, active power factor correction, and comprehensive safety monitoring. Features include over-current protection, thermal management, and real-time efficiency monitoring. The design meets all relevant safety standards including UL and IEC certifications.",
-        imageUrl: "https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["Power Electronics", "EV Charging", "Safety", "UL Certified", "Thermal Management"],
-        category: "Power Systems",
-        status: "completed",
-        projectUrl: null,
-        githubUrl: null,
-        createdAt: new Date("2024-02-10"),
-        gallery: [
-          "https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-        ]
-      },
-      {
-        id: "3",
-        title: "Medical Device Control",
-        description: "FDA-compliant control system for medical imaging equipment with precision timing and safety protocols.",
-        longDescription: "A critical control system for medical imaging equipment requiring FDA compliance and IEC 60601-1 certification. The system manages high-precision timing for imaging sequences, implements multiple layers of safety monitoring, and includes comprehensive fault detection and reporting. All software is developed following IEC 62304 standards for medical device software lifecycle processes.",
+        title: "Hospital Equipment Installation",
+        description: "When installing critical medical equipment that affects patient safety, a PECE must review and seal all electrical systems.",
+        longDescription: "Hospitals installing new medical imaging equipment, surgical systems, or critical care devices require PECE oversight. The professional engineer ensures all electrical installations meet IEC 60601-1 medical safety standards, validates proper grounding systems, reviews emergency power backup systems, and certifies that electrical isolation meets stringent medical requirements. This is especially critical for equipment in wet locations like operating rooms or areas with flammable anesthetics.",
         imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["Medical", "FDA Compliant", "Precision", "IEC 60601", "Safety Critical"],
-        category: "Medical Devices",
-        status: "completed",
+        technologies: ["Medical Standards", "IEC 60601", "Safety Systems", "Emergency Power", "Grounding"],
+        category: "Medical Compliance",
+        status: "scenario",
         projectUrl: null,
         githubUrl: null,
-        createdAt: new Date("2024-03-05"),
+        createdAt: new Date("2024-01-15"),
         gallery: [
           "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
         ]
       },
       {
-        id: "4",
-        title: "Automation Control",
-        description: "Comprehensive automation control system for manufacturing processes with real-time monitoring and feedback.",
-        longDescription: "An industrial automation solution for manufacturing process control featuring real-time monitoring, adaptive feedback control, and predictive maintenance capabilities. The system integrates with existing SCADA infrastructure and provides comprehensive data logging and analysis tools. Designed for 24/7 operation with redundant safety systems.",
+        id: "2",
+        title: "Industrial Manufacturing Setup",
+        description: "Large manufacturing facilities need PECE approval for electrical systems, motor controls, and safety interlocks.",
+        longDescription: "Manufacturing plants with heavy machinery, motor control centers above certain horsepower ratings, or complex automation systems require PECE review. This includes validation of electrical load calculations, short circuit analysis, arc flash studies, and ensuring compliance with NFPA 70E workplace safety standards. The engineer must also verify proper sizing of transformers, switchgear, and protective devices for the industrial environment.",
         imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["Automation", "Industrial", "Control", "SCADA", "Real-time"],
-        category: "Industrial Automation",
-        status: "completed",
+        technologies: ["Motor Controls", "NFPA 70E", "Arc Flash", "Load Analysis", "Industrial Safety"],
+        category: "Industrial",
+        status: "scenario",
         projectUrl: null,
         githubUrl: null,
-        createdAt: new Date("2024-04-12"),
+        createdAt: new Date("2024-02-10"),
         gallery: [
           "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
         ]
       },
       {
-        id: "5",
-        title: "RF Communication",
-        description: "Long-range RF communication system for remote monitoring applications with advanced signal processing.",
-        longDescription: "A sophisticated RF communication system designed for long-range remote monitoring applications. Features advanced digital signal processing, adaptive frequency hopping, and robust error correction. The system operates in the ISM band with FCC Part 15 compliance and provides reliable communication over distances up to 50 kilometers in open terrain.",
+        id: "3",
+        title: "Telecommunications Infrastructure",
+        description: "Cell towers, radio stations, and broadcast facilities require PECE certification for RF systems and tower grounding.",
+        longDescription: "Telecommunications projects involving radio frequency systems, antenna installations, or broadcast equipment need PECE oversight for both electrical safety and RF exposure compliance. This includes proper tower grounding systems, lightning protection, RF hazard analysis, and ensuring compliance with FCC regulations for maximum permissible exposure (MPE) levels. The engineer must also verify backup power systems and emergency shutdown procedures.",
         imageUrl: "https://images.unsplash.com/photo-1606314850633-ac6eca832fbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["RF Design", "Long Range", "Signal Processing", "FCC Certified", "Digital Communications"],
-        category: "Communications",
-        status: "completed",
+        technologies: ["RF Systems", "FCC Compliance", "Tower Grounding", "Lightning Protection", "MPE Analysis"],
+        category: "Telecommunications",
+        status: "scenario",
         projectUrl: null,
         githubUrl: null,
-        createdAt: new Date("2024-05-20"),
+        createdAt: new Date("2024-03-05"),
         gallery: [
           "https://images.unsplash.com/photo-1606314850633-ac6eca832fbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
         ]
       },
       {
-        id: "6",
-        title: "Renewable Energy",
-        description: "Smart grid integration system for renewable energy sources with maximum power point tracking and grid synchronization.",
-        longDescription: "An advanced renewable energy integration system featuring maximum power point tracking (MPPT) algorithms, grid synchronization, and smart inverter functionality. The system supports both solar and wind energy sources with dynamic load balancing and energy storage management. Complies with IEEE 1547 standards for distributed energy resources.",
+        id: "4",
+        title: "Solar Power System Integration",
+        description: "Commercial solar installations over certain capacity require PECE review for grid interconnection and safety systems.",
+        longDescription: "Large-scale solar installations, especially those connecting to the utility grid, require PECE certification to ensure compliance with IEEE 1547 interconnection standards. The engineer reviews inverter specifications, protective relay settings, anti-islanding protection, and grid synchronization systems. This also includes evaluation of DC and AC disconnect systems, grounding electrode systems, and rapid shutdown requirements for firefighter safety.",
         imageUrl: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
-        technologies: ["Solar", "Smart Grid", "MPPT", "IEEE 1547", "Energy Storage"],
+        technologies: ["Solar PV", "IEEE 1547", "Grid Interconnection", "Rapid Shutdown", "Protective Relays"],
         category: "Renewable Energy",
-        status: "completed",
+        status: "scenario",
+        projectUrl: null,
+        githubUrl: null,
+        createdAt: new Date("2024-04-12"),
+        gallery: [
+          "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ]
+      },
+      {
+        id: "5",
+        title: "Data Center Electrical Design",
+        description: "Critical data centers require PECE oversight for uninterruptible power systems and redundant electrical infrastructure.",
+        longDescription: "Data centers with high availability requirements need PECE review of their electrical infrastructure including UPS systems, emergency generators, automatic transfer switches, and redundant power distribution. The engineer must ensure compliance with TIA-942 data center standards, validate N+1 or 2N redundancy configurations, and perform detailed load analysis for critical vs. non-critical systems. Proper grounding and EMI mitigation are also essential for data integrity.",
+        imageUrl: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        technologies: ["UPS Systems", "TIA-942", "Redundancy", "Emergency Generators", "EMI Mitigation"],
+        category: "Data Centers",
+        status: "scenario",
+        projectUrl: null,
+        githubUrl: null,
+        createdAt: new Date("2024-05-20"),
+        gallery: [
+          "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+        ]
+      },
+      {
+        id: "6",
+        title: "Electric Vehicle Charging Stations",
+        description: "Public EV charging infrastructure requires PECE certification for high-power electrical systems and safety features.",
+        longDescription: "Electric vehicle charging stations, particularly DC fast chargers, require PECE review due to their high-power electrical systems and public accessibility. The engineer must verify proper installation of charging equipment, ground fault protection, ventilation requirements for indoor installations, and compliance with NFPA 70 Article 625. This includes evaluation of load management systems, utility coordination for demand charges, and ensuring proper signage and safety barriers around high-voltage equipment.",
+        imageUrl: "https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        technologies: ["EV Charging", "NFPA 70", "Ground Fault", "Load Management", "High Voltage Safety"],
+        category: "Transportation",
+        status: "scenario",
         projectUrl: null,
         githubUrl: null,
         createdAt: new Date("2024-06-15"),
         gallery: [
-          "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+          "https://images.unsplash.com/photo-1593941707882-a5bac6861d75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
         ]
       }
     ];

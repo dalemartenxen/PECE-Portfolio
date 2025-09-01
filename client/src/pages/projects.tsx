@@ -28,11 +28,11 @@ export default function Projects() {
     // Scroll to top when page loads
     window.scrollTo({ top: 0, behavior: "auto" });
     
-    document.title = "All Projects - ElectroPro Engineering";
+    document.title = "When You Need a PECE - ElectroPro Engineering";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Browse all electronics engineering projects including IoT systems, power management, medical devices, and automation solutions.');
+      metaDescription.setAttribute('content', 'Discover scenarios when you need a Professional Electronics/Computer Engineer (PECE) for compliance, safety, and certification.');
     }
   }, []);
 
@@ -86,7 +86,7 @@ export default function Projects() {
         <div className="flex items-center justify-center min-h-[50vh] pt-20">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading projects...</p>
+            <p className="text-muted-foreground">Loading scenarios...</p>
           </div>
         </div>
         <Footer />
@@ -100,9 +100,9 @@ export default function Projects() {
         <Navbar />
         <div className="flex items-center justify-center min-h-[50vh] pt-20">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Error Loading Projects</h1>
+            <h1 className="text-2xl font-bold mb-4">Error Loading Scenarios</h1>
             <p className="text-muted-foreground mb-6">
-              Failed to load projects. Please try again later.
+              Failed to load scenarios. Please try again later.
             </p>
             <Button asChild data-testid="button-back-home">
               <a href="/">Back to Home</a>
@@ -132,13 +132,13 @@ export default function Projects() {
                 className="text-4xl md:text-5xl font-bold mb-6"
                 data-testid="text-projects-page-title"
               >
-                All <span className="gradient-text">Projects</span>
+                When You Need a <span className="gradient-text">PECE</span>
               </h1>
               <p 
                 className="text-xl text-secondary-foreground max-w-3xl mx-auto mb-12"
                 data-testid="text-projects-page-description"
               >
-                Explore our complete portfolio of electronics engineering solutions across various industries and applications.
+                Discover common scenarios where a Professional Electronics/Computer Engineer (PECE) is required for safety, compliance, and regulatory approval.
               </p>
 
               {/* Search and Filter Section */}
@@ -149,11 +149,11 @@ export default function Projects() {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="Search projects by name or keyword..."
+                      placeholder="Search scenarios by keywords..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
-                      data-testid="input-search-projects"
+                      data-testid="input-search-scenarios"
                     />
                   </div>
                 </div>
@@ -211,10 +211,10 @@ export default function Projects() {
                   <Button 
                     onClick={handleSearch}
                     className="gradient-bg w-full max-w-sm"
-                    data-testid="button-search-projects"
+                    data-testid="button-search-scenarios"
                   >
                     <Search className="mr-2 h-4 w-4" />
-                    Search Projects
+                    Search Scenarios
                   </Button>
                 </div>
               </div>
@@ -229,7 +229,7 @@ export default function Projects() {
               <>
                 <div className="flex justify-between items-center mb-8">
                   <p className="text-muted-foreground" data-testid="text-results-count">
-                    Showing {filteredProjects.length} of {projects?.length || 0} projects
+                    Showing {filteredProjects.length} of {projects?.length || 0} scenarios
                   </p>
                 </div>
 
@@ -253,9 +253,9 @@ export default function Projects() {
                 transition={{ duration: 0.6 }}
                 className="text-center py-16"
               >
-                <h3 className="text-2xl font-bold mb-4">No Projects Found</h3>
+                <h3 className="text-2xl font-bold mb-4">No Scenarios Found</h3>
                 <p className="text-muted-foreground">
-                  No projects match your current search criteria. Try adjusting your filters.
+                  No scenarios match your current search criteria. Try adjusting your filters.
                 </p>
               </motion.div>
             )}

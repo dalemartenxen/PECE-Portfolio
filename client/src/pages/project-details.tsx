@@ -15,7 +15,7 @@ export default function ProjectDetails() {
   const projectId = params?.id;
 
   // Optimized navigation functions
-  const handleBackToProjects = () => {
+  const handleBackToScenarios = () => {
     setLocation("/projects");
     // Ensure we scroll to top when navigating
     setTimeout(() => {
@@ -61,7 +61,7 @@ export default function ProjectDetails() {
         <div className="flex items-center justify-center min-h-[50vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading project details...</p>
+            <p className="text-muted-foreground">Loading scenario details...</p>
           </div>
         </div>
         <Footer />
@@ -75,16 +75,16 @@ export default function ProjectDetails() {
         <Navbar />
         <div className="flex items-center justify-center min-h-[50vh]">
           <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Project Not Found</h1>
+            <h1 className="text-2xl font-bold mb-4">Scenario Not Found</h1>
             <p className="text-muted-foreground mb-6">
-              The project you're looking for doesn't exist.
+              The scenario you're looking for doesn't exist.
             </p>
             <Button 
-              onClick={handleBackToProjects}
-              data-testid="button-back-projects-error"
+              onClick={handleBackToScenarios}
+              data-testid="button-back-scenarios-error"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Projects
+              Back to Scenarios
             </Button>
           </div>
         </div>
@@ -108,12 +108,12 @@ export default function ProjectDetails() {
             >
               <Button
                 variant="ghost"
-                onClick={handleBackToProjects}
+                onClick={handleBackToScenarios}
                 className="mb-8 text-muted-foreground hover:text-primary"
-                data-testid="button-back-projects"
+                data-testid="button-back-scenarios"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Projects
+                Back to Scenarios
               </Button>
 
               <div className="grid lg:grid-cols-2 gap-12 items-center">

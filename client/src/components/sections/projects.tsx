@@ -16,7 +16,7 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Loading projects...</p>
+            <p className="text-muted-foreground">Loading scenarios...</p>
           </div>
         </div>
       </section>
@@ -29,9 +29,9 @@ export default function Projects() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Featured <span className="gradient-text">Projects</span>
+              When You Need a <span className="gradient-text">PECE</span>
             </h2>
-            <p className="text-xl text-destructive">Failed to load projects. Please try again later.</p>
+            <p className="text-xl text-destructive">Failed to load scenarios. Please try again later.</p>
           </div>
         </div>
       </section>
@@ -51,10 +51,10 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-projects-title">
-            Featured <span className="gradient-text">Projects</span>
+            When You Need a <span className="gradient-text">PECE</span>
           </h2>
           <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-projects-description">
-            A showcase of recent projects demonstrating expertise across various electronics engineering domains.
+            Common scenarios where Professional Electronics/Computer Engineer certification is required for safety, compliance, and regulatory approval.
           </p>
         </motion.div>
 
@@ -87,13 +87,13 @@ export default function Projects() {
                 className="gradient-bg text-primary-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
                 data-testid="button-view-all-projects"
               >
-                <Link href="/projects">View All Projects</Link>
+                <Link href="/projects">View All Scenarios</Link>
               </Button>
             </motion.div>
           </>
         ) : (
           <div className="text-center">
-            <p className="text-xl text-muted-foreground">No projects available at the moment.</p>
+            <p className="text-xl text-muted-foreground">No scenarios available at the moment.</p>
           </div>
         )}
       </div>
