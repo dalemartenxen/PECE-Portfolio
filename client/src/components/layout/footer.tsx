@@ -51,7 +51,7 @@ export default function Footer() {
               PECE Consultancy and Sign-Seal Services
             </a>
             <p className="text-secondary-foreground mb-6 max-w-md" data-testid="text-footer-description">
-              Professional electronics engineering services with over 15 years of experience in consultancy, design, and regulatory compliance.
+              Professional electronics engineering services specializing in consultancy, design, and regulatory compliance.
             </p>
             <div className="flex space-x-4">
               <a 

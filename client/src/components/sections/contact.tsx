@@ -125,37 +125,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Social Links */}
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-6">Connect With Me</h3>
-              <div className="flex justify-center space-x-6">
-                <a 
-                  href="mailto:contact@electroproeng.com" 
-                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                  data-testid="link-social-email"
-                >
-                  <Mail className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
-                </a>
-                <a 
-                  href="https://linkedin.com/in/electroproeng" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                  data-testid="link-social-linkedin"
-                >
-                  <Linkedin className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
-                </a>
-                <a 
-                  href="https://facebook.com/electroproeng" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 bg-card border border-border hover:border-primary rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                  data-testid="link-social-facebook"
-                >
-                  <Facebook className="h-6 w-6 text-muted-foreground hover:text-primary transition-colors duration-300" />
-                </a>
-              </div>
-            </div>
 
           </motion.div>
         </div>
