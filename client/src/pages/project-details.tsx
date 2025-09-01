@@ -169,7 +169,7 @@ export default function ProjectDetails() {
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
+                    {project.technologies.filter(tech => tech !== "Automation").map((tech) => (
                       <span
                         key={tech}
                         className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"
