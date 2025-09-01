@@ -47,15 +47,6 @@ export default function Projects() {
                 <ExternalLink className="mr-2 h-5 w-5" />
                 View Case Studies
               </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                asChild
-                className="px-8 py-4 text-lg font-semibold"
-                data-testid="button-view-all-projects"
-              >
-                <a href="/projects">Learn More</a>
-              </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
               dictbataan.substack.com
