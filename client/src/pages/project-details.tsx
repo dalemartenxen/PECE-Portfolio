@@ -167,18 +167,6 @@ export default function ProjectDetails() {
                       </Button>
                     )}
                   </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.filter(tech => tech !== "Automation").map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"
-                        data-testid={`tech-${tech.toLowerCase().replace(/\s+/g, "-")}`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="relative">
