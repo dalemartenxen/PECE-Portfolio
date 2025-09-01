@@ -6,7 +6,6 @@ import { ArrowLeft, ExternalLink, Github, Calendar, Tag } from "lucide-react";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Project } from "@shared/schema";
 
@@ -146,14 +145,13 @@ export default function ProjectDetails() {
 
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
-                      <Badge
+                      <span
                         key={tech}
-                        variant="secondary"
-                        className="bg-primary/10 text-primary hover:bg-primary/20"
-                        data-testid={`badge-tech-${tech.toLowerCase().replace(/\s+/g, "-")}`}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary"
+                        data-testid={`tech-${tech.toLowerCase().replace(/\s+/g, "-")}`}
                       >
                         {tech}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -273,17 +271,16 @@ export default function ProjectDetails() {
                           <p className="text-sm text-muted-foreground mb-2">
                             Status
                           </p>
-                          <Badge
-                            variant={
+                          <span
+                            className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize ${
                               project.status === "completed"
-                                ? "default"
-                                : "secondary"
-                            }
-                            className="capitalize"
-                            data-testid="badge-project-status"
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-secondary text-secondary-foreground"
+                            }`}
+                            data-testid="status-project-status"
                           >
                             {project.status}
-                          </Badge>
+                          </span>
                         </div>
                       </div>
 
