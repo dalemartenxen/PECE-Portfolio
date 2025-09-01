@@ -127,22 +127,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Floating Elements */}
-      <motion.div 
-        className="absolute top-20 right-10 opacity-20"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <Cpu className="h-16 w-16 text-primary" />
-      </motion.div>
-      
-      <motion.div 
-        className="absolute bottom-20 left-10 opacity-20"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      >
-        <Zap className="h-10 w-10 text-accent" />
-      </motion.div>
     </section>
   );
 }
