@@ -1,122 +1,80 @@
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import ws from "ws";
+import * as schema from "@shared/schema";
+import { eq } from 'drizzle-orm';
 import type { InsertProject, InsertContactSubmission, InsertArticle, Project, ContactSubmission, Article } from '@shared/schema';
 
-// API client for database operations
+// Configure Neon for serverless
+if (typeof window === 'undefined') {
+  neonConfig.webSocketConstructor = ws;
+}
+
+if (!import.meta.env.VITE_DATABASE_URL) {
+  throw new Error(
+    "VITE_DATABASE_URL must be set. Did you forget to provision a database?",
+  );
+}
+
+const pool = new Pool({ connectionString: import.meta.env.VITE_DATABASE_URL });
+export const db = drizzle({ client: pool, schema });
+
+// Database operations
 export const dbOperations = {
   // Projects
   async getAllProjects(): Promise<Project[]> {
-    const response = await fetch('/api/projects');
-    if (!response.ok) {
-      throw new Error('Failed to fetch projects');
-    }
-    return await response.json();
+    return await db.select().from(schema.projects);
   },
 
   async getProject(id: string): Promise<Project | undefined> {
-    const response = await fetch(`/api/projects/${id}`);
-    if (response.status === 404) {
-      return undefined;
-    }
-    if (!response.ok) {
-      throw new Error('Failed to fetch project');
-    }
-    return await response.json();
+    const [project] = await db.select().from(schema.projects).where(eq(schema.projects.id, id));
+    return project;
   },
 
   async createProject(project: InsertProject): Promise<Project> {
-    const response = await fetch('/api/projects', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(project),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to create project');
-    }
-    return await response.json();
+    const [newProject] = await db.insert(schema.projects).values(project).returning();
+    return newProject;
   },
 
   async updateProject(id: string, project: Partial<InsertProject>): Promise<Project | undefined> {
-    const response = await fetch(`/api/projects/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(project),
-    });
-    if (response.status === 404) {
-      return undefined;
-    }
-    if (!response.ok) {
-      throw new Error('Failed to update project');
-    }
-    return await response.json();
+    const [updatedProject] = await db
+      .update(schema.projects)
+      .set(project)
+      .where(eq(schema.projects.id, id))
+      .returning();
+    return updatedProject;
   },
 
   async deleteProject(id: string): Promise<boolean> {
-    const response = await fetch(`/api/projects/${id}`, {
-      method: 'DELETE',
-    });
-    if (response.status === 404) {
-      return false;
-    }
-    return response.ok;
+    const result = await db.delete(schema.projects).where(eq(schema.projects.id, id));
+    return (result.rowCount ?? 0) > 0;
   },
 
   // Contact submissions
   async createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission> {
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(submission),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to submit contact form');
-    }
-    return await response.json();
+    const [newSubmission] = await db
+      .insert(schema.contactSubmissions)
+      .values(submission)
+      .returning();
+    return newSubmission;
   },
 
   async getAllContactSubmissions(): Promise<ContactSubmission[]> {
-    const response = await fetch('/api/contact');
-    if (!response.ok) {
-      throw new Error('Failed to fetch contact submissions');
-    }
-    return await response.json();
+    return await db.select().from(schema.contactSubmissions);
   },
 
   // Articles
   async getAllArticles(): Promise<Article[]> {
-    const response = await fetch('/api/articles');
-    if (!response.ok) {
-      throw new Error('Failed to fetch articles');
-    }
-    return await response.json();
+    return await db.select().from(schema.articles);
   },
 
   async getArticle(id: string): Promise<Article | undefined> {
-    const response = await fetch(`/api/articles/${id}`);
-    if (response.status === 404) {
-      return undefined;
-    }
-    if (!response.ok) {
-      throw new Error('Failed to fetch article');
-    }
-    return await response.json();
+    const [article] = await db.select().from(schema.articles).where(eq(schema.articles.id, id));
+    return article;
   },
 
   async createArticle(article: InsertArticle): Promise<Article> {
-    const response = await fetch('/api/articles', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(article),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to create article');
-    }
-    return await response.json();
+    const [newArticle] = await db.insert(schema.articles).values(article).returning();
+    return newArticle;
   }
 };
