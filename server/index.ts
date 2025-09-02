@@ -3,6 +3,7 @@ import { createServer } from "http";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+const isDev = process.env.NODE_ENV !== "production";
 
 // Basic error handling middleware
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -16,21 +17,22 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   try {
     const server = createServer(app);
 
-    // Setup Vite in development and static serving in production
-    // The Vite setup includes its own wildcard route for serving the frontend
-    if (app.get("env") === "development") {
+    if (isDev) {
+      // DEVELOPMENT: Vite + Express for HMR
       await setupVite(app, server);
     } else {
+      // PRODUCTION: serve static files from dist
+      // This works locally; on Vercel, Express will be ignored
       serveStatic(app);
     }
-    
+
     const port = parseInt(process.env.PORT || '5000', 10);
     server.listen({
       port,
       host: "0.0.0.0",
       reusePort: true,
     }, () => {
-      log(`serving on port ${port}`);
+      log(`serving on port ${port} [${isDev ? 'development' : 'production'}]`);
     });
   } catch (error) {
     console.error("Error starting server:", error);
