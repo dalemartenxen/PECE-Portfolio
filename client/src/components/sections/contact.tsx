@@ -90,7 +90,7 @@ export default function Contact() {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-xl text-secondary-foreground max-w-3xl mx-auto" data-testid="text-contact-description">
-            Ready to discuss your electronics engineering project? Let's connect and explore how I can help bring your ideas to life.
+            Ready to discuss your project needs? Let's connect!
           </p>
         </motion.div>
 
@@ -104,7 +104,6 @@ export default function Contact() {
             className="space-y-12"
           >
             <div className="text-center">
-              <h3 className="text-3xl font-bold mb-8">Contact Information</h3>
               <div className="grid md:grid-cols-3 gap-8">
                 {contactInfo.map((info, index) => (
                   <div key={info.title} className="flex flex-col items-center text-center" data-testid={`contact-info-${index}`}>
