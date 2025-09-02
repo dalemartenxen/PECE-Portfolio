@@ -16,19 +16,20 @@ export default function About() {
   return (
     <section id="about" className="py-20 bg-card/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-4xl mx-auto">
           {/* Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-about-title">
               About the <span className="gradient-text">Service</span>
             </h2>
             
-            <div className="space-y-6 text-lg text-secondary-foreground leading-relaxed">
+            <div className="space-y-6 text-lg text-secondary-foreground leading-relaxed text-left max-w-none">
               <p data-testid="text-about-paragraph-1">
                 Our professional electronics engineering consultancy services are founded on the mandate of <span className="text-primary font-semibold">Republic Act No. 9292, otherwise known as the Electronics Engineering Law of 2004</span>. Under <span className="text-primary font-semibold">Section 5 of the Act</span>, the scope and practice of Electronics Engineers cover the application of engineering sciences and principles in the design, planning, construction, installation, operation, testing, maintenance, and management of electronic systems and networks across various fields such as ICT, telecommunications, broadcasting, industrial and consumer electronics, avionics, aerospace, medical electronics, robotics, biometrics, and convergent technologies.
               </p>
@@ -41,38 +42,15 @@ export default function About() {
                 Our services guarantee that every design, document, and certification is backed by the competence, responsibility, and professional accountability of a duly licensed Professional Electronics Engineer, as required by law.
               </p>
             </div>
-
-            {/* Core Services */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold mb-4 text-primary">Core Services</h3>
-              <div className="space-y-3 text-base">
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>PECE Consultancy in compliance with RA 9292</span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Sign & Seal of Electronics Engineering Designs and Technical Documents</span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Fire Detection and Alarm Systems (FDAS) and Electronics Systems Integration</span>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                  <span>Regulatory Compliance Support for LGUs, Government Agencies, and the Private Sector</span>
-                </div>
-              </div>
-            </div>
           </motion.div>
 
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative"
+            className="relative mb-12 max-w-2xl mx-auto"
           >
             <img 
               src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
@@ -86,7 +64,7 @@ export default function About() {
               className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-6 shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               viewport={{ once: true }}
               data-testid="stat-years-experience"
             >
@@ -100,7 +78,7 @@ export default function About() {
               className="absolute -top-6 -right-6 bg-card border border-border rounded-xl p-6 shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               viewport={{ once: true }}
               data-testid="stat-projects-completed"
             >
@@ -109,6 +87,35 @@ export default function About() {
                 <div className="text-sm text-muted-foreground">Projects Completed</div>
               </div>
             </motion.div>
+          </motion.div>
+
+          {/* Core Services */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h3 className="text-xl font-semibold mb-6 text-primary">Core Services</h3>
+            <div className="grid md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                <span>PECE Consultancy in compliance with RA 9292</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                <span>Sign & Seal of Electronics Engineering Designs and Technical Documents</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                <span>Fire Detection and Alarm Systems (FDAS) and Electronics Systems Integration</span>
+              </div>
+              <div className="flex items-start space-x-3">
+                <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                <span>Regulatory Compliance Support for LGUs, Government Agencies, and the Private Sector</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
