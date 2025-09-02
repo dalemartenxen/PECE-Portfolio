@@ -158,7 +158,7 @@ export default function Navbar() {
               className="text-xl font-bold gradient-text cursor-pointer"
               data-testid="link-logo"
             >
-              PECE Consultancy and Sign-Seal Services
+              PECE Consultancy and Services
             </a>
           </div>
 

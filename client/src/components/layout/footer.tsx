@@ -88,7 +88,7 @@ export default function Footer() {
               className="text-2xl font-bold gradient-text mb-4 block"
               data-testid="link-footer-logo"
             >
-              PECE Consultancy and Sign-Seal Services
+              PECE Consultancy and Services
             </a>
             <p className="text-secondary-foreground mb-6 max-w-md" data-testid="text-footer-description">
               Professional electronics engineering services specializing in consultancy, design, and regulatory compliance.
@@ -168,7 +168,7 @@ export default function Footer() {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm" data-testid="text-copyright">
-            © {currentYear} PECE Consultancy and Sign-Seal Services. All rights reserved.
+            © {currentYear} PECE Consultancy and Services. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a 
