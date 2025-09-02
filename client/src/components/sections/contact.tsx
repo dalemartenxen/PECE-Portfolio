@@ -1,56 +1,12 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
-import { insertContactSubmissionSchema, type InsertContactSubmission } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
 
 export default function Contact() {
-  const { toast } = useToast();
-  
-  const form = useForm<InsertContactSubmission>({
-    resolver: zodResolver(insertContactSubmissionSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      service: "",
-      message: "",
-    },
-  });
-
-  const contactMutation = useMutation({
-    mutationFn: async (data: InsertContactSubmission) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Message Sent!",
-        description: data.message || "Thank you for your message! I'll get back to you within 24 hours.",
-      });
-      form.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: InsertContactSubmission) => {
-    contactMutation.mutate(data);
+  const handleEmailClick = () => {
+    const subject = "PECE Consultation Request";
+    const body = "Hello,\n\nI would like to discuss my project requirements for Professional Electronics Engineer services.\n\nBest regards,";
+    window.location.href = `mailto:sddgmes@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const contactInfo = [
@@ -124,7 +80,21 @@ export default function Contact() {
               </div>
             </div>
 
-
+            {/* Email CTA */}
+            <div className="text-center">
+              <Button 
+                onClick={handleEmailClick}
+                size="lg"
+                className="gradient-bg"
+                data-testid="button-send-email"
+              >
+                <Mail className="mr-2 h-5 w-5" />
+                Send Email
+              </Button>
+              <p className="text-sm text-muted-foreground mt-4">
+                Opens your email client with a pre-filled consultation request
+              </p>
+            </div>
           </motion.div>
         </div>
       </div>
