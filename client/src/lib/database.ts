@@ -1,14 +1,11 @@
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
 import * as schema from "@shared/schema";
 import { eq } from 'drizzle-orm';
 import type { InsertProject, InsertContactSubmission, InsertArticle, Project, ContactSubmission, Article } from '@shared/schema';
 
-// Configure Neon for serverless
-if (typeof window === 'undefined') {
-  neonConfig.webSocketConstructor = ws;
-}
+// Configure Neon for browser environment
+// WebSocket constructor is automatically available in browser environments
 
 if (!import.meta.env.VITE_DATABASE_URL) {
   throw new Error(
