@@ -20,7 +20,7 @@ export default function Resources() {
   }, []);
 
   const handleVisitSubstack = () => {
-    window.open('https://dictbataan.substack.com/', '_blank');
+    window.open('https://pececonsultancy.substack.com/', '_blank');
   };
 
   return (
@@ -73,7 +73,7 @@ export default function Resources() {
                       Read on Substack
                     </Button>
                     <p className="text-sm text-muted-foreground">
-                      dictbataan.substack.com
+                      pececonsultancy.substack.com
                     </p>
                   </CardContent>
                 </Card>

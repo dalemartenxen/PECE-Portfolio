@@ -23,29 +23,25 @@ export default function Navbar() {
 
             let currentSection = "home"; // Default to home section
 
-            // Check sections in reverse order to properly detect the last section
-            for (let i = sections.length - 1; i >= 0; i--) {
-              const section = sections[i];
+            // Find the closest section to the current scroll position
+            let closestSection = "home";
+            let minDistance = Infinity;
+            
+            for (const section of sections) {
               const element = document.getElementById(section);
               if (element) {
                 const offsetTop = element.offsetTop;
+                const distance = Math.abs(scrollPosition - offsetTop);
                 
-                // For the last section (contact), check if we're at or past its top
-                if (i === sections.length - 1) {
-                  if (scrollPosition >= offsetTop) {
-                    currentSection = section;
-                    break;
-                  }
-                } else {
-                  // For other sections, check boundaries normally
-                  const offsetHeight = element.offsetHeight;
-                  if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                    currentSection = section;
-                    break;
-                  }
+                // If the scroll position is past this section's top
+                if (scrollPosition >= offsetTop && distance < minDistance) {
+                  closestSection = section;
+                  minDistance = distance;
                 }
               }
             }
+            
+            currentSection = closestSection;
 
             setActiveSection(currentSection);
             ticking = false;
