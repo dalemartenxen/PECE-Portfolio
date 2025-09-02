@@ -53,10 +53,10 @@ export default function About() {
             className="relative mb-12 max-w-2xl mx-auto"
           >
             <img 
-              src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Professional engineer working on electronics design" 
+              src="https://images.unsplash.com/photo-1559163499-413811fb2344?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+              alt="Professional electronics engineering services and regulatory compliance" 
               className="rounded-2xl shadow-2xl w-full" 
-              data-testid="img-about-engineer"
+              data-testid="img-about-service"
             />
             
             {/* Stats Overlays */}
