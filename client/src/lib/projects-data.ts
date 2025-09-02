@@ -11,7 +11,7 @@ export const getProjectById = async (id: string): Promise<Project | null> => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching project:', error);
+    // Error fetching project
     return null;
   }
 };
@@ -24,7 +24,7 @@ export const getAllProjects = async (): Promise<Project[]> => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching projects:', error);
+    // Error fetching projects
     return [];
   }
 };
@@ -45,7 +45,7 @@ export const createProject = async (project: Omit<Project, 'id' | 'createdAt'>):
     
     return await response.json();
   } catch (error) {
-    console.error('Error creating project:', error);
+    // Error creating project
     return null;
   }
 };

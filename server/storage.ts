@@ -641,6 +641,8 @@ Remember: investing time in proper planning and design upfront saves significant
     const newProject: Project = { 
       ...project, 
       id, 
+      status: project.status || "draft",
+      technologies: project.technologies as string[],
       createdAt: new Date(),
       longDescription: project.longDescription || null,
       projectUrl: project.projectUrl || null,
@@ -658,6 +660,7 @@ Remember: investing time in proper planning and design upfront saves significant
     const updatedProject: Project = { 
       ...existingProject, 
       ...project,
+      technologies: project.technologies ? project.technologies as string[] : existingProject.technologies,
       longDescription: project.longDescription !== undefined ? project.longDescription : existingProject.longDescription,
       projectUrl: project.projectUrl !== undefined ? project.projectUrl : existingProject.projectUrl,
       githubUrl: project.githubUrl !== undefined ? project.githubUrl : existingProject.githubUrl,
@@ -705,7 +708,8 @@ Remember: investing time in proper planning and design upfront saves significant
     const id = randomUUID();
     const newArticle: Article = { 
       ...article, 
-      id, 
+      id,
+      tags: article.tags ? article.tags as string[] : [],
       createdAt: new Date(),
       publishedAt: new Date()
     };
