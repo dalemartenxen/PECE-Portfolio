@@ -25,41 +25,43 @@ export default function About() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6" data-testid="text-about-title">
-              About the <span className="gradient-text">Engineer</span>
+              About the <span className="gradient-text">Service</span>
             </h2>
             
             <div className="space-y-6 text-lg text-secondary-foreground leading-relaxed">
               <p data-testid="text-about-paragraph-1">
-                With years of experience in electronics engineering, I provide PECE consultancy and sign-seal services for electronic design & systems and regulatory compliance.
+                Our professional electronics engineering consultancy services are founded on the mandate of <span className="text-primary font-semibold">Republic Act No. 9292, otherwise known as the Electronics Engineering Law of 2004</span>. Under <span className="text-primary font-semibold">Section 5 of the Act</span>, the scope and practice of Electronics Engineers cover the application of engineering sciences and principles in the design, planning, construction, installation, operation, testing, maintenance, and management of electronic systems and networks across various fields such as ICT, telecommunications, broadcasting, industrial and consumer electronics, avionics, aerospace, medical electronics, robotics, biometrics, and convergent technologies.
               </p>
               
               <p data-testid="text-about-paragraph-2">
-                My expertise spans across Information and Communications Technology (ICT), Telecommunications (Outside Plant Design), Fire Detection and Alarm System (FDAS) and Electronics Systems Design. I hold professional engineering licenses and certifications that enable me to provide legally binding engineering certifications and documentation.
+                What sets the <span className="text-primary font-semibold">Professional Electronics Engineer (PECE)</span> apart is the <span className="text-primary font-semibold">exclusive authority</span> granted under RA 9292, Section 5(b) — the sole authority to provide consulting services and to sign and seal electronics engineering plans, designs, specifications, reports, permit applications, and other technical documents prepared by themselves or under their direct supervision. This ensures not only technical soundness but also legal validity and regulatory compliance for projects requiring electronics engineering expertise.
               </p>
               
               <p data-testid="text-about-paragraph-3">
-                I work with local companies, local government units, and government agencies to ensure their electronics engineering needs meet all regulatory requirements and maintaining industry-standard compliant and cost-effectiveness.
+                Our services guarantee that every design, document, and certification is backed by the competence, responsibility, and professional accountability of a duly licensed Professional Electronics Engineer, as required by law.
               </p>
             </div>
 
-            {/* Credentials */}
+            {/* Core Services */}
             <div className="mt-8">
-              <h3 className="text-xl font-semibold mb-4 text-primary">Professional Credentials</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {credentials.map((credential, index) => (
-                  <motion.div
-                    key={credential.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex items-center space-x-3"
-                    data-testid={`credential-${index}`}
-                  >
-                    <credential.icon className="h-5 w-5 text-primary" />
-                    <span>{credential.title}</span>
-                  </motion.div>
-                ))}
+              <h3 className="text-xl font-semibold mb-4 text-primary">Core Services</h3>
+              <div className="space-y-3 text-base">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span>PECE Consultancy in compliance with RA 9292</span>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Sign & Seal of Electronics Engineering Designs and Technical Documents</span>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Fire Detection and Alarm Systems (FDAS) and Electronics Systems Integration</span>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                  <span>Regulatory Compliance Support for LGUs, Government Agencies, and the Private Sector</span>
+                </div>
               </div>
             </div>
           </motion.div>
