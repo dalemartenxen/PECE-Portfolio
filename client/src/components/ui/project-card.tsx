@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { Project } from "../../types/project";
+import { Project } from "@shared/schema";
 
 interface ProjectCardProps {
   project: Project;

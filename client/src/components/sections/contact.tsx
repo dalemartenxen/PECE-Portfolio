@@ -1,12 +1,56 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, Phone, MapPin, Linkedin, Facebook } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+import { insertContactSubmissionSchema, type InsertContactSubmission } from "@shared/schema";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function Contact() {
-  const handleEmailContact = () => {
-    const subject = "PECE Consultancy Inquiry";
-    const body = "Hello,\n\nI am interested in your electronics engineering services. Please contact me to discuss my project requirements.\n\nBest regards,";
-    window.open(`mailto:sddgmes@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_self');
+  const { toast } = useToast();
+  
+  const form = useForm<InsertContactSubmission>({
+    resolver: zodResolver(insertContactSubmissionSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      company: "",
+      service: "",
+      message: "",
+    },
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: InsertContactSubmission) => {
+      const response = await apiRequest("POST", "/api/contact", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Message Sent!",
+        description: data.message || "Thank you for your message! I'll get back to you within 24 hours.",
+      });
+      form.reset();
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: InsertContactSubmission) => {
+    contactMutation.mutate(data);
   };
 
   const contactInfo = [
@@ -80,28 +124,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Contact Action */}
-            <div className="text-center">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border max-w-2xl mx-auto"
-              >
-                <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-                <p className="text-secondary-foreground mb-6">Send me an email to discuss your electronics engineering needs and get professional PECE consultation.</p>
-                <Button 
-                  onClick={handleEmailContact}
-                  size="lg"
-                  className="gradient-bg text-primary-foreground px-8 py-4 text-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/25 hover:scale-105"
-                  data-testid="button-send-email"
-                >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Send Email
-                </Button>
-              </motion.div>
-            </div>
 
           </motion.div>
         </div>
