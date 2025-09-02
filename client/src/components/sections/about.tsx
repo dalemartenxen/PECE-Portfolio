@@ -53,8 +53,8 @@ export default function About() {
             className="relative mb-12 max-w-2xl mx-auto"
           >
             <img 
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Architect working on technical blueprints and engineering documents" 
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+              alt="Architect man working on blueprint with engineer planning on office desk" 
               className="rounded-2xl shadow-2xl w-full" 
               data-testid="img-about-service"
             />
