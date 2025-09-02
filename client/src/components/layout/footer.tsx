@@ -13,11 +13,9 @@ export default function Footer() {
     { name: "About", href: "/#about", type: "section" },
   ];
 
-  const legalLinks = [
-    { name: "Privacy Policy", href: "#privacy" },
-    { name: "Terms of Service", href: "#terms" },
-    { name: "Cookie Policy", href: "#cookies" },
-    { name: "Compliance", href: "#compliance" },
+  const contactInfo = [
+    { name: "Email", href: "mailto:sddgmes@gmail.com", value: "sddgmes@gmail.com" },
+    { name: "Phone", href: "tel:+639151332084", value: "(+63) 915 133 2084" },
   ];
 
   const handleLinkClick = (href: string, type: string) => {
@@ -146,22 +144,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Contact */}
           <div>
-            <h3 className="font-bold mb-4">Legal</h3>
+            <h3 className="font-bold mb-4">Contact</h3>
             <ul className="space-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.name}>
+              {contactInfo.map((contact) => (
+                <li key={contact.name}>
                   <a 
-                    href={link.href} 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // These are placeholder links for now
-                    }}
+                    href={contact.href} 
                     className="text-secondary-foreground hover:text-primary transition-colors duration-300"
-                    data-testid={`link-footer-legal-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    data-testid={`link-footer-contact-${contact.name.toLowerCase()}`}
                   >
-                    {link.name}
+                    <div className="font-medium">{contact.name}</div>
+                    <div className="text-sm">{contact.value}</div>
                   </a>
                 </li>
               ))}

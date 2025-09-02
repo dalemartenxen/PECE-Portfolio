@@ -23,15 +23,26 @@ export default function Navbar() {
 
             let currentSection = "home"; // Default to home section
 
-            for (const section of sections) {
+            // Check sections in reverse order to properly detect the last section
+            for (let i = sections.length - 1; i >= 0; i--) {
+              const section = sections[i];
               const element = document.getElementById(section);
               if (element) {
                 const offsetTop = element.offsetTop;
-                const offsetHeight = element.offsetHeight;
-
-                // Check if we're within this section's boundaries
-                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                  currentSection = section;
+                
+                // For the last section (contact), check if we're at or past its top
+                if (i === sections.length - 1) {
+                  if (scrollPosition >= offsetTop) {
+                    currentSection = section;
+                    break;
+                  }
+                } else {
+                  // For other sections, check boundaries normally
+                  const offsetHeight = element.offsetHeight;
+                  if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                    currentSection = section;
+                    break;
+                  }
                 }
               }
             }

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Projects() {
   const handleVisitSubstack = () => {
-    window.open('https://dictbataan.substack.com/', '_blank');
+    window.open('https://pececonsultancy.substack.com/', '_blank');
   };
 
   return (
@@ -45,7 +45,7 @@ export default function Projects() {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              dictbataan.substack.com
+              pececonsultancy.substack.com
             </p>
           </div>
         </motion.div>
