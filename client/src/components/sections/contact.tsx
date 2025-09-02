@@ -12,7 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { insertContactSubmissionSchema, type InsertContactSubmission } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
+import { dbOperations } from "@/lib/database";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -30,13 +30,12 @@ export default function Contact() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: InsertContactSubmission) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
+      return await dbOperations.createContactSubmission(data);
     },
     onSuccess: (data) => {
       toast({
         title: "Message Sent!",
-        description: data.message || "Thank you for your message! I'll get back to you within 24 hours.",
+        description: "Thank you for your message! I'll get back to you within 24 hours.",
       });
       form.reset();
     },
