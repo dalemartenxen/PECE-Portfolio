@@ -41,7 +41,7 @@ export default function Resources() {
                 className="text-4xl md:text-5xl font-bold mb-6"
                 data-testid="text-resources-page-title"
               >
-                PECE <span className="gradient-text">Knowledge Hub</span>
+                Knowledge <span className="gradient-text">Resources</span>
               </h1>
               <p 
                 className="text-xl text-secondary-foreground max-w-3xl mx-auto mb-12"
