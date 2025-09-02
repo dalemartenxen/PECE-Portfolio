@@ -641,11 +641,13 @@ Remember: investing time in proper planning and design upfront saves significant
     const newProject: Project = { 
       ...project, 
       id, 
+      status: project.status || "completed",
+      technologies: project.technologies as string[],
       createdAt: new Date(),
       longDescription: project.longDescription || null,
       projectUrl: project.projectUrl || null,
       githubUrl: project.githubUrl || null,
-      gallery: project.gallery as string[] | null || null
+      gallery: project.gallery ? project.gallery as string[] : null
     };
     this.projects.set(id, newProject);
     return newProject;
@@ -658,10 +660,11 @@ Remember: investing time in proper planning and design upfront saves significant
     const updatedProject: Project = { 
       ...existingProject, 
       ...project,
+      technologies: project.technologies ? project.technologies as string[] : existingProject.technologies,
       longDescription: project.longDescription !== undefined ? project.longDescription : existingProject.longDescription,
       projectUrl: project.projectUrl !== undefined ? project.projectUrl : existingProject.projectUrl,
       githubUrl: project.githubUrl !== undefined ? project.githubUrl : existingProject.githubUrl,
-      gallery: project.gallery !== undefined ? project.gallery as string[] | null : existingProject.gallery
+      gallery: project.gallery !== undefined ? (project.gallery as string[] | null) : existingProject.gallery
     };
     this.projects.set(id, updatedProject);
     return updatedProject;
@@ -706,6 +709,7 @@ Remember: investing time in proper planning and design upfront saves significant
     const newArticle: Article = { 
       ...article, 
       id, 
+      tags: article.tags as string[],
       createdAt: new Date(),
       publishedAt: new Date()
     };
