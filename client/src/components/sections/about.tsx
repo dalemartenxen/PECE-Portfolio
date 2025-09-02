@@ -44,50 +44,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="relative mb-12 max-w-2xl mx-auto"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Architect man working on blueprint with engineer planning on office desk" 
-              className="rounded-2xl shadow-2xl w-full" 
-              data-testid="img-about-service"
-            />
-            
-            {/* Stats Overlays */}
-            <motion.div 
-              className="absolute -bottom-6 -left-6 bg-card border border-border rounded-xl p-6 shadow-lg"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              viewport={{ once: true }}
-              data-testid="stat-years-experience"
-            >
-              <div className="text-center">
-                <div className="text-3xl font-bold gradient-text">7+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="absolute -top-6 -right-6 bg-card border border-border rounded-xl p-6 shadow-lg"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              viewport={{ once: true }}
-              data-testid="stat-projects-completed"
-            >
-              <div className="text-center">
-                <div className="text-3xl font-bold gradient-text">10+</div>
-                <div className="text-sm text-muted-foreground">Projects Completed</div>
-              </div>
-            </motion.div>
-          </motion.div>
 
           {/* Core Services */}
           <motion.div
