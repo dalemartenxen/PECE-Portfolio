@@ -13,11 +13,17 @@ export default function Navbar() {
     // Only set up scroll listener on home page
     if (location === "/") {
       let ticking = false;
-      
+
       const handleScroll = () => {
         if (!ticking) {
           requestAnimationFrame(() => {
-            const sections = ["home", "about", "services", "projects", "contact"];
+            const sections = [
+              "home",
+              "about",
+              "services",
+              "projects",
+              "contact",
+            ];
             const navbarHeight = 64; // 16 * 4 (h-16 in Tailwind)
             const scrollPosition = window.scrollY + navbarHeight + 50; // More precise offset
 
@@ -26,13 +32,13 @@ export default function Navbar() {
             // Find the closest section to the current scroll position
             let closestSection = "home";
             let minDistance = Infinity;
-            
+
             for (const section of sections) {
               const element = document.getElementById(section);
               if (element) {
                 const offsetTop = element.offsetTop;
                 const distance = Math.abs(scrollPosition - offsetTop);
-                
+
                 // If the scroll position is past this section's top
                 if (scrollPosition >= offsetTop && distance < minDistance) {
                   closestSection = section;
@@ -40,7 +46,7 @@ export default function Navbar() {
                 }
               }
             }
-            
+
             currentSection = closestSection;
 
             setActiveSection(currentSection);
@@ -52,14 +58,17 @@ export default function Navbar() {
 
       // Initial call to set correct section on load
       handleScroll();
-      
+
       window.addEventListener("scroll", handleScroll, { passive: true });
       return () => window.removeEventListener("scroll", handleScroll);
     } else {
       // Set active section based on current route
       if (location === "/projects") {
         setActiveSection("projects");
-      } else if (location === "/resources" || location.startsWith("/resource/")) {
+      } else if (
+        location === "/resources" ||
+        location.startsWith("/resource/")
+      ) {
         setActiveSection("resources");
       }
     }
@@ -70,13 +79,12 @@ export default function Navbar() {
     { name: "Case Studies", href: "/#projects", type: "section" },
     { name: "Services", href: "/#services", type: "section" },
     { name: "About", href: "/#about", type: "section" },
-    { name: "Resources", href: "/resources", type: "page" },
     { name: "Contact", href: "/#contact", type: "section" },
   ];
 
   const handleNavClick = (href: string, type: string) => {
     setIsOpen(false);
-    
+
     if (type === "page") {
       // For page navigation, use fast client-side routing
       setLocation(href);
@@ -96,10 +104,10 @@ export default function Navbar() {
           if (element) {
             const navbarHeight = 64; // Account for fixed navbar
             const offsetPosition = element.offsetTop - navbarHeight - 20; // Extra space for visual comfort
-            
+
             window.scrollTo({
               top: offsetPosition,
-              behavior: "smooth"
+              behavior: "smooth",
             });
           }
         }, 150); // Slightly longer delay for page load
@@ -110,10 +118,10 @@ export default function Navbar() {
         if (element) {
           const navbarHeight = 64; // Account for fixed navbar
           const offsetPosition = element.offsetTop - navbarHeight - 20; // Extra space for visual comfort
-          
+
           window.scrollTo({
             top: offsetPosition,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       }
@@ -123,7 +131,11 @@ export default function Navbar() {
   const isActive = (item: any) => {
     if (item.type === "page") {
       if (item.href === "/projects" && location === "/projects") return true;
-      if (item.href === "/resources" && (location === "/resources" || location.startsWith("/resource/"))) return true;
+      if (
+        item.href === "/resources" &&
+        (location === "/resources" || location.startsWith("/resource/"))
+      )
+        return true;
       return false;
     } else {
       // For sections, only active when on home page and section matches
@@ -165,7 +177,7 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
+              {navItems.map((item) =>
                 item.type === "page" ? (
                   <Link
                     key={item.name}
@@ -196,8 +208,8 @@ export default function Navbar() {
                   >
                     {item.name}
                   </a>
-                )
-              ))}
+                ),
+              )}
             </div>
           </div>
 
@@ -230,7 +242,7 @@ export default function Navbar() {
           transition={{ duration: 0.3 }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
+            {navItems.map((item) =>
               item.type === "page" ? (
                 <Link
                   key={item.name}
@@ -262,8 +274,8 @@ export default function Navbar() {
                 >
                   {item.name}
                 </a>
-              )
-            ))}
+              ),
+            )}
           </div>
         </motion.div>
       )}

@@ -7,14 +7,18 @@ export default function Footer() {
   const [location, setLocation] = useLocation();
 
   const quickLinks = [
-    { name: "Case Studies", href: "/projects", type: "page" },
+    { name: "Case Studies", href: "/#projects", type: "section" },
     { name: "Resources", href: "/resources", type: "page" },
     { name: "Services", href: "/#services", type: "section" },
     { name: "About", href: "/#about", type: "section" },
   ];
 
   const contactInfo = [
-    { name: "Email", href: "mailto:sddgmes@gmail.com", value: "sddgmes@gmail.com" },
+    {
+      name: "Email",
+      href: "mailto:sddgmes@gmail.com",
+      value: "sddgmes@gmail.com",
+    },
     { name: "Phone", href: "tel:+639151332084", value: "(+63) 915 133 2084" },
   ];
 
@@ -40,7 +44,7 @@ export default function Footer() {
             const offsetPosition = element.offsetTop - navbarHeight - 20;
             window.scrollTo({
               top: offsetPosition,
-              behavior: "smooth"
+              behavior: "smooth",
             });
           }
         }, 150);
@@ -53,7 +57,7 @@ export default function Footer() {
           const offsetPosition = element.offsetTop - navbarHeight - 20;
           window.scrollTo({
             top: offsetPosition,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       }
@@ -72,8 +76,8 @@ export default function Footer() {
         >
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <a 
-              href="#home" 
+            <a
+              href="#home"
               onClick={(e) => {
                 e.preventDefault();
                 if (location !== "/") {
@@ -90,29 +94,33 @@ export default function Footer() {
             >
               PECE Consultancy and Services
             </a>
-            <p className="text-secondary-foreground mb-6 max-w-md" data-testid="text-footer-description">
-              Professional electronics engineering services specializing in consultancy, design, and regulatory compliance.
+            <p
+              className="text-secondary-foreground mb-6 max-w-md"
+              data-testid="text-footer-description"
+            >
+              Professional electronics engineering services specializing in
+              consultancy, design, and regulatory compliance.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="mailto:sddgmes@gmail.com" 
+              <a
+                href="mailto:sddgmes@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 data-testid="link-footer-email"
               >
                 <Mail className="h-5 w-5" />
               </a>
-              <a 
-                href="https://linkedin.com/in/sddmartensen" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com/in/sddmartensen"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 data-testid="link-footer-linkedin"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a 
-                href="https://facebook.com/sddgmes" 
-                target="_blank" 
+              <a
+                href="https://facebook.com/sddgmes"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-300"
                 data-testid="link-footer-facebook"
@@ -128,8 +136,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       handleLinkClick(link.href, link.type);
@@ -150,8 +158,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {contactInfo.map((contact) => (
                 <li key={contact.name}>
-                  <a 
-                    href={contact.href} 
+                  <a
+                    href={contact.href}
                     className="text-secondary-foreground hover:text-primary transition-colors duration-300"
                     data-testid={`link-footer-contact-${contact.name.toLowerCase()}`}
                   >
@@ -165,28 +173,31 @@ export default function Footer() {
         </motion.div>
 
         <hr className="border-border my-8" />
-        
+
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm" data-testid="text-copyright">
+          <p
+            className="text-muted-foreground text-sm"
+            data-testid="text-copyright"
+          >
             © {currentYear} PECE Consultancy and Services. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
               data-testid="link-privacy-policy"
             >
               Privacy Policy
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
               data-testid="link-terms-service"
             >
               Terms of Service
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="text-muted-foreground hover:text-primary text-sm transition-colors duration-300"
               data-testid="link-cookie-policy"
             >
